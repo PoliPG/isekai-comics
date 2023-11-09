@@ -15,8 +15,19 @@
     "Title": {
       "type": "string"
     },
-    "time": {
-      "type": "integer"
+    "MetaTitle": {
+      "type": "string",
+      "maxLength": 60,
+      "required": true
+    },
+    "MetaDescription": {
+      "type": "string",
+      "maxLength": 150,
+      "required": true
+    },
+    "Content": {
+      "type": "richtext",
+      "required": true
     }
   }
 }
