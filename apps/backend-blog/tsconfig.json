@@ -1,9 +1,19 @@
 {
-  "extends": "tsconfig/vite.json",
+  "extends": "@strapi/typescript-utils/tsconfigs/server",
   "compilerOptions": {
-    "moduleResolution": "nodenext",
-    "target": "ES2021",
-    "checkJs": true,
+    "outDir": "dist",
+    "rootDir": ".",
     "allowJs": true
-  }
+  },
+  "include": ["./", "src/**/*.json"],
+  "exclude": [
+    "node_modules/",
+    "build/",
+    "dist/",
+    ".cache/",
+    ".tmp/",
+    "src/admin/",
+    "**/*.test.ts",
+    "src/plugins/**"
+  ]
 }
