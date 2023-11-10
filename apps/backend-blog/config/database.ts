@@ -1,9 +1,9 @@
 const path = require('path');
 
-module.exports = ({ env }) => {
+module.exports = ({ env }: {env: any}) => {
   const client = env('DATABASE_CLIENT', 'postgres');
 
-  const connections = {
+  const connections: {[key: string]: any} = {
     mysql: {
       connection: {
         connectionString: env('DATABASE_URL'),

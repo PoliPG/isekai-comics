@@ -1,4 +1,5 @@
 {
+  "extends": "tsconfig/vite.json",
   "compilerOptions": {
     "moduleResolution": "nodenext",
     "target": "ES2021",

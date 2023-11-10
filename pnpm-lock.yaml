@@ -25,10 +25,10 @@ importers:
     dependencies:
       '@strapi/plugin-i18n':
         specifier: 4.15.2
-        version: 4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(@strapi/strapi@4.15.2)(codemirror@6.0.1)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.2.2)
+        version: 4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(@strapi/strapi@4.15.2)(codemirror@6.0.1)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@4.9.5)
       '@strapi/plugin-users-permissions':
         specifier: 4.15.2
-        version: 4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(@strapi/strapi@4.15.2)(codemirror@6.0.1)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.2.2)
+        version: 4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(@strapi/strapi@4.15.2)(codemirror@6.0.1)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@4.9.5)
       '@strapi/strapi':
         specifier: 4.15.2
         version: 4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(better-sqlite3@8.6.0)(codemirror@6.0.1)(pg@8.11.3)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)
@@ -63,9 +63,15 @@ importers:
       prettier:
         specifier: ^2.5.1
         version: 2.8.8
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
       turbo:
         specifier: latest
         version: 1.10.16
+      typescript:
+        specifier: ^4.9.4
+        version: 4.9.5
 
   apps/blog: {}
 
@@ -1371,6 +1377,24 @@ packages:
       tslib: 2.6.2
     dev: false
 
+  /@formatjs/intl@2.7.1(typescript@4.9.5):
+    resolution: {integrity: sha512-se6vxidsN3PCmzqTsDd3YDT4IX9ZySPy39LYhF7x2ssNvlGMOuW3umkrIhKkXB7ZskqsJGY53LVCdiHsSwhGng==}
+    peerDependencies:
+      typescript: ^4.7 || 5
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.14.3
+      '@formatjs/fast-memoize': 2.0.1
+      '@formatjs/icu-messageformat-parser': 2.3.1
+      '@formatjs/intl-displaynames': 6.3.1
+      '@formatjs/intl-listformat': 7.2.1
+      intl-messageformat: 10.3.4
+      tslib: 2.6.2
+      typescript: 4.9.5
+    dev: false
+
   /@formatjs/intl@2.7.1(typescript@5.2.2):
     resolution: {integrity: sha512-se6vxidsN3PCmzqTsDd3YDT4IX9ZySPy39LYhF7x2ssNvlGMOuW3umkrIhKkXB7ZskqsJGY53LVCdiHsSwhGng==}
     peerDependencies:
@@ -2649,7 +2673,7 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/helper-plugin@4.15.2(@strapi/design-system@1.13.0)(@strapi/icons@1.13.0)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(styled-components@5.3.3)(typescript@5.2.2):
+  /@strapi/helper-plugin@4.15.2(@strapi/design-system@1.13.0)(@strapi/icons@1.13.0)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(styled-components@5.3.3)(typescript@4.9.5):
     resolution: {integrity: sha512-2deUiLEo4YWnisJ5KgF5lClH02nlw9Z52V7aW6Cohs3hof5NJrMSN8aaZJynhRXXpxO71cb2ZSsz+liQdISlgA==}
     engines: {node: '>=18.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
@@ -2671,7 +2695,7 @@ packages:
       react: 18.0.0
       react-dom: 18.0.0(react@18.0.0)
       react-helmet: 6.1.0(react@18.0.0)
-      react-intl: 6.4.1(react@18.0.0)(typescript@5.2.2)
+      react-intl: 6.4.1(react@18.0.0)(typescript@4.9.5)
       react-query: 3.39.3(react-dom@18.0.0)(react@18.0.0)
       react-router-dom: 5.3.4(react@18.0.0)
       react-select: 5.7.0(react-dom@18.0.0)(react@18.0.0)
@@ -2851,7 +2875,7 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/plugin-i18n@4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(@strapi/strapi@4.15.2)(codemirror@6.0.1)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.2.2):
+  /@strapi/plugin-i18n@4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(@strapi/strapi@4.15.2)(codemirror@6.0.1)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@4.9.5):
     resolution: {integrity: sha512-/1oAF/QRMGjdbg4BOyOZ8tn9S3QZwV15FvbSN+kWoW8AQDbc8ZTSIFG2YKIP1g7jdb2hAV78D64avOKwQ8tq9Q==}
     engines: {node: '>=18.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
@@ -2863,7 +2887,7 @@ packages:
     dependencies:
       '@reduxjs/toolkit': 1.9.7(react-redux@8.1.1)(react@18.0.0)
       '@strapi/design-system': 1.13.0(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(@strapi/icons@1.13.0)(codemirror@6.0.1)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(styled-components@5.3.3)
-      '@strapi/helper-plugin': 4.15.2(@strapi/design-system@1.13.0)(@strapi/icons@1.13.0)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(styled-components@5.3.3)(typescript@5.2.2)
+      '@strapi/helper-plugin': 4.15.2(@strapi/design-system@1.13.0)(@strapi/icons@1.13.0)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(styled-components@5.3.3)(typescript@4.9.5)
       '@strapi/icons': 1.13.0(react-dom@18.0.0)(react@18.0.0)
       '@strapi/strapi': 4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(better-sqlite3@8.6.0)(codemirror@6.0.1)(pg@8.11.3)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)
       '@strapi/utils': 4.15.2
@@ -2874,7 +2898,7 @@ packages:
       qs: 6.11.1
       react: 18.0.0
       react-dom: 18.0.0(react@18.0.0)
-      react-intl: 6.4.1(react@18.0.0)(typescript@5.2.2)
+      react-intl: 6.4.1(react@18.0.0)(typescript@4.9.5)
       react-query: 3.39.3(react-dom@18.0.0)(react@18.0.0)
       react-redux: 8.1.1(react-dom@18.0.0)(react@18.0.0)(redux@4.2.1)
       react-router-dom: 5.3.4(react@18.0.0)
@@ -2960,7 +2984,7 @@ packages:
       - typescript
     dev: false
 
-  /@strapi/plugin-users-permissions@4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(@strapi/strapi@4.15.2)(codemirror@6.0.1)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@5.2.2):
+  /@strapi/plugin-users-permissions@4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(@strapi/strapi@4.15.2)(codemirror@6.0.1)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)(typescript@4.9.5):
     resolution: {integrity: sha512-ZDM5TSEHXsyw6AIEPXbVzTf3L3AN3TDshT2oppdOMQye7OVuvRxNlxBRvs9NxzRhwvy/jK42cyfamLP+XcyVlQ==}
     engines: {node: '>=18.0.0 <=20.x.x', npm: '>=6.0.0'}
     peerDependencies:
@@ -2971,7 +2995,7 @@ packages:
       styled-components: ^5.2.1
     dependencies:
       '@strapi/design-system': 1.13.0(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(@strapi/icons@1.13.0)(codemirror@6.0.1)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(styled-components@5.3.3)
-      '@strapi/helper-plugin': 4.15.2(@strapi/design-system@1.13.0)(@strapi/icons@1.13.0)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(styled-components@5.3.3)(typescript@5.2.2)
+      '@strapi/helper-plugin': 4.15.2(@strapi/design-system@1.13.0)(@strapi/icons@1.13.0)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(styled-components@5.3.3)(typescript@4.9.5)
       '@strapi/icons': 1.13.0(react-dom@18.0.0)(react@18.0.0)
       '@strapi/strapi': 4.15.2(@babel/runtime@7.23.2)(@codemirror/autocomplete@6.11.0)(@codemirror/language@6.9.2)(@codemirror/lint@6.4.2)(@codemirror/search@6.5.4)(@codemirror/state@6.3.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.22.0)(better-sqlite3@8.6.0)(codemirror@6.0.1)(pg@8.11.3)(react-dom@18.0.0)(react-router-dom@5.3.4)(react@18.0.0)(redux@4.2.1)(styled-components@5.3.3)
       '@strapi/utils': 4.15.2
@@ -2988,7 +3012,7 @@ packages:
       purest: 4.0.2
       react: 18.0.0
       react-dom: 18.0.0(react@18.0.0)
-      react-intl: 6.4.1(react@18.0.0)(typescript@5.2.2)
+      react-intl: 6.4.1(react@18.0.0)(typescript@4.9.5)
       react-query: 3.39.3(react-dom@18.0.0)(react@18.0.0)
       react-redux: 8.1.1(react-dom@18.0.0)(react@18.0.0)(redux@4.2.1)
       react-router-dom: 5.3.4(react@18.0.0)
@@ -9064,6 +9088,29 @@ packages:
       react: 18.0.0
       react-fast-compare: 3.2.2
       react-side-effect: 2.1.2(react@18.0.0)
+    dev: false
+
+  /react-intl@6.4.1(react@18.0.0)(typescript@4.9.5):
+    resolution: {integrity: sha512-/aT5595AEMZ+Pjmt8W2R5/ZkYJmyyd6jTzHzqhJ1LnfeG36+N5huBtykxYhHqLc1BrIRQ1fTX1orYC0Ej5ojtg==}
+    peerDependencies:
+      react: ^16.6.0 || 17 || 18
+      typescript: ^4.7 || 5
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      '@formatjs/ecma402-abstract': 1.14.3
+      '@formatjs/icu-messageformat-parser': 2.3.1
+      '@formatjs/intl': 2.7.1(typescript@4.9.5)
+      '@formatjs/intl-displaynames': 6.3.1
+      '@formatjs/intl-listformat': 7.2.1
+      '@types/hoist-non-react-statics': 3.3.5
+      '@types/react': 18.2.37
+      hoist-non-react-statics: 3.3.2
+      intl-messageformat: 10.3.4
+      react: 18.0.0
+      tslib: 2.6.2
+      typescript: 4.9.5
     dev: false
 
   /react-intl@6.4.1(react@18.0.0)(typescript@5.2.2):

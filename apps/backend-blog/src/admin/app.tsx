@@ -1,8 +1,10 @@
 const config = {
-  locales: [
-     'en',
-     'es-ES'
-  ],
+  locales: ['en','es'],
+  translations: {
+    es: {
+      'app.components.LeftMenu.navbrand.title': 'Iseakai Comics',
+    }
+  },
   theme: {
     light: {
       colors: {
@@ -18,7 +20,7 @@ const config = {
   }
 };
 
-const bootstrap = (app) => {
+const bootstrap = (app: any) => {
   console.log(app);
 };
 
