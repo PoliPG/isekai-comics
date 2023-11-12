@@ -1,7 +1,7 @@
 {
-	"name": "blog-template",
+	"name": "blog",
 	"type": "module",
-	"version": "1.1.0",
+	"version": "0.0.1",
 	"description": "A template for creating a blog with Astro",
 	"author": "danielcgilibert",
 	"license": "GPL-3.0-only",
@@ -31,6 +31,7 @@
 		"lint": "eslint ."
 	},
 	"dependencies": {
+		"@astrojs/node": "^6.0.3",
 		"@astrojs/rss": "3.0.0",
 		"astro": "3.5.3"
 	},
@@ -42,6 +43,7 @@
 		"@tailwindcss/typography": "0.5.10",
 		"@typescript-eslint/parser": "^6.7.4",
 		"clsx": "2.0.0",
+		"dotenv": "^16.3.1",
 		"eslint": "^8.53.0",
 		"eslint-plugin-astro": "^0.29.1",
 		"eslint-plugin-jsx-a11y": "^6.7.1",
