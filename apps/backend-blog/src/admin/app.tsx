@@ -1,30 +1,19 @@
-const config = {
-  locales: ['en','es'],
-  translations: {
-    es: {
-      'app.components.LeftMenu.navbrand.title': 'Iseakai Comics',
-    }
-  },
-  theme: {
-    light: {
-      colors: {
-        primary100: '#c9ffeb',
-        primary200: '#5effc3',
-        primary500: '#00f298',
-        buttonPrimary500: '#fff298',
-        primary600: '#00bd77',
-        buttonPrimary600: '#ffbd77',
-        primary700: '#008755',
-      }
-    }
-  }
-};
-
-const bootstrap = (app: any) => {
-  console.log(app);
-};
+import favicon from './extensions/favicon.png'
 
 export default {
-  config,
-  bootstrap,
-};
+  config: {
+    locales: ['es'],
+    translations: {
+      en: {
+        'app.components.HomePage.welcome': 'Bienvenidos a bordo',
+        'app.components.HomePage.welcome.again': 'Bienvenidos ',
+      },
+    },
+    head: {
+      favicon,
+    },
+  },
+  bootstrap(app: any) {
+    console.log(app)
+  },
+}

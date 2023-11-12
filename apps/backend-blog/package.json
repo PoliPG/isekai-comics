@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "strapi develop",
+    "dev": "strapi develop --watch-admin",
     "start": "strapi start",
     "build": "strapi build",
     "lint": "eslint --ext .js,.ts . --fix"
@@ -17,14 +17,14 @@
     "turbo": "latest"
   },
   "dependencies": {
+    "@strapi/strapi": "4.15.2",
     "@strapi/plugin-i18n": "4.15.2",
     "@strapi/plugin-users-permissions": "4.15.2",
-    "@strapi/strapi": "4.15.2",
-    "pg": "^8.11.3",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-router-dom": "^5.2.0",
     "strapi-plugin-react-editorjs": "^2.0.2",
+    "pg": "^8.11.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "5.3.4",
     "styled-components": "^5.2.1"
   },
   "author": {

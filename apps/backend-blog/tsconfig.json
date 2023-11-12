@@ -3,9 +3,15 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": ".",
-    "allowJs": true
+    "allowJs": true,
+    "strictNullChecks": true
   },
-  "include": ["./", "src/**/*.json"],
+  "include": [ 
+    "./",
+  "./**/*.ts",
+  "./**/*.js",
+  "src/**/*.json"
+],
   "exclude": [
     "node_modules/",
     "build/",
