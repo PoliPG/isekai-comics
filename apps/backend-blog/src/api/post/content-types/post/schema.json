@@ -26,8 +26,18 @@
       "required": true
     },
     "Content": {
-      "type": "richtext",
-      "required": true
+      "type": "customField",
+      "options": {
+        "preset": "custom"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
+    },
+    "ContentBlocks": {
+      "type": "dynamiczone",
+      "components": [
+        "content.content-block",
+        "content.iframe-product"
+      ]
     }
   }
 }

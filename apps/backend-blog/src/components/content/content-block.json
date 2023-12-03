@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_content_content_blocks",
+  "info": {
+    "displayName": "contentBlock",
+    "icon": "cube"
+  },
+  "options": {},
+  "attributes": {
+    "Content": {
+      "type": "customField",
+      "options": {
+        "preset": "custom"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
+    }
+  }
+}

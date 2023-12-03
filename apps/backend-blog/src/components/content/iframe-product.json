@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_content_iframe_products",
+  "info": {
+    "displayName": "IframeProduct",
+    "icon": "priceTag"
+  },
+  "options": {},
+  "attributes": {
+    "iframeHtml": {
+      "type": "text",
+      "required": true
+    }
+  }
+}

@@ -383,7 +383,16 @@ export interface ApiPostPost extends Schema.CollectionType {
       Attribute.SetMinMaxLength<{
         maxLength: 150
       }>
-    Content: Attribute.RichText & Attribute.Required
+    Content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'custom'
+        }
+      >
+    ContentBlocks: Attribute.DynamicZone<
+      ['content.content-block', 'content.iframe-product']
+    >
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime

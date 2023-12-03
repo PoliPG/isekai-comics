@@ -9,7 +9,6 @@ export default {
    */
   register({ strapi }: { strapi: Strapi }) {
     // ...
-    console.log(strapi)
   },
   /**
    * An asynchronous bootstrap function that runs before

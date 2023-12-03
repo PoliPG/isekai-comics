@@ -9,16 +9,16 @@
     "lint": "eslint --ext .js,.ts . --fix"
   },
   "devDependencies": {
-    "@strapi/typescript-utils": "^4.15.2",
+    "@strapi/typescript-utils": "^4.15.5-alpha.5",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
   "dependencies": {
-    "@strapi/strapi": "4.15.2",
-    "@strapi/plugin-users-permissions": "4.15.2",
-    "strapi-plugin-react-editorjs": "^2.0.2",
+    "@_sh/strapi-plugin-ckeditor": "^2.0.4",
+    "@strapi/plugin-users-permissions": "4.15.5-alpha.5",
+    "@strapi/strapi": "4.15.5-alpha.5",
     "pg": "^8.11.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
