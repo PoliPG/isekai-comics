@@ -372,7 +372,7 @@ export interface ApiPostPost extends Schema.CollectionType {
     draftAndPublish: true
   }
   attributes: {
-    Title: Attribute.String
+    Title: Attribute.String & Attribute.Required
     MetaTitle: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
