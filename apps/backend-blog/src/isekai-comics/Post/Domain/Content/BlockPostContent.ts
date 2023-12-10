@@ -1,14 +1,13 @@
-import { PostContent } from "./PostContent";
+import { PostContent } from './PostContent'
 
 export class BlockPostContent implements PostContent {
+  private block: string
 
-    private block: string
+  constructor(block: string) {
+    this.block = block
+  }
 
-    constructor(block: string) {
-        this.block = block
-    }
-
-    getContent(): string {
-        return this.block
-    }
+  getContent(): string {
+    return this.block
+  }
 }

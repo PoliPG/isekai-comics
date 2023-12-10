@@ -1,14 +1,13 @@
-import { PostContent } from "./PostContent";
+import { PostContent } from './PostContent'
 
 export class IframePostContent implements PostContent {
+  private iframe: string
 
-    private iframe: string
+  constructor(iframe: string) {
+    this.iframe = iframe
+  }
 
-    constructor(iframe: string) {
-        this.iframe = iframe
-    }
-
-    getContent(): string {
-        return this.iframe
-    }
+  getContent(): string {
+    return this.iframe
+  }
 }

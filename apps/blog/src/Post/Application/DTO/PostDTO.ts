@@ -1,7 +1,7 @@
 export class PostDTO {
-    readonly id: number
+  readonly id: number
 
-    constructor(id: number) {
-        this.id = id
-    }
+  constructor(id: number) {
+    this.id = id
+  }
 }

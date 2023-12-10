@@ -1,3 +1,3 @@
 export interface PostContent {
-    getContent(): string
+  getContent(): string
 }

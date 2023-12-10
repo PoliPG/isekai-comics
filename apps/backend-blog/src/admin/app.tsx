@@ -22,10 +22,9 @@ export default {
           primary600: '#cf333b',
           buttonPrimary600: '#cf333b',
           primary700: '#af282f',
-        }
-      }
-    }
+        },
+      },
+    },
   },
-  bootstrap(app: any) {
-  },
+  bootstrap(app: any) {},
 }

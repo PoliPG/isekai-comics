@@ -1,15 +1,15 @@
 export default [
   'strapi::errors',
   {
-  name: 'strapi::security',
-  config: {
-    contentSecurityPolicy: {
-      directives: {
-        'img-src': ['*'],
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        directives: {
+          'img-src': ['*'],
+        },
       },
-    }
+    },
   },
-},
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::logger',
@@ -18,4 +18,4 @@ export default [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
-];
+]
