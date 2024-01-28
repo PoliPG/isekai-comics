@@ -1,5 +1,5 @@
 import { Strapi } from '@strapi/strapi'
-import { container } from './container'
+import { IocContainer } from 'ioc-container'
 import { EntityService } from '@strapi/strapi'
 
 export default {
@@ -10,7 +10,7 @@ export default {
    * This gives you an opportunity to extend code.
    */
   register({ strapi }: { strapi: Strapi }) {
-    // ...
+    const container = IocContainer.getInstance()
 
     if (strapi.entityService)
       container
