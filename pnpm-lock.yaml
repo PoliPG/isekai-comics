@@ -81,6 +81,9 @@ importers:
       ioc-container:
         specifier: workspace:*
         version: link:../../packages/ioc-container
+      message-bus:
+        specifier: workspace:*
+        version: link:../../packages/message-bus
     devDependencies:
       '@astrojs/mdx':
         specifier: 1.1.1
@@ -185,6 +188,15 @@ importers:
       typescript:
         specifier: ^4.9.4
         version: 4.9.5
+
+  packages/message-bus:
+    devDependencies:
+      eslint-config-custom:
+        specifier: workspace:*
+        version: link:../eslint-config-custom
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
 
   packages/tsconfig: {}
 

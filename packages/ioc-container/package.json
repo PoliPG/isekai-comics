@@ -5,7 +5,7 @@
   "types": "./index.d.js",
   "license": "MIT",
   "exports": {
-    ".": "./index.js"
+    ".": "./src/index.ts"
   },
   "scripts": {
     "build": "tsc --project ./tsconfig.json"

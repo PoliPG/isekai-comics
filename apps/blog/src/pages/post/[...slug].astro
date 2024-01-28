@@ -1,43 +1,49 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
 import BlogPost from '@/layouts/BlogPost'
 import Code from '@/components/mdx/Code'
 import ListRelatedPosts from '@/components/ListRelatedPosts'
 import Share from '@/components/Share'
 import TableOfContents from '@/components/TableOfContents'
-import {IocContainer} from 'ioc-container'
 import SButton from '@/components/mdx/SButton'
+import { IocContainer } from 'ioc-container'
+import { MessageBus } from 'message-bus'
+import types from 'src/types'
+import { PostViewCommand } from 'src/Post/Application/post-view/PostViewCommand'
+import { PostViewDTO } from 'src/Post/Application/post-view/DTO/PostViewDTO'
 
-const postRepository = IocContainer.getInstance().
-export async function getStaticPaths() {
-	const posts = await getPosts()
+export const prerender = false // server
+const {slug} = Astro.params
 
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post
-	}))
-}
-type Props = CollectionEntry<'blog'>
+/* */
+const command = new PostViewCommand(1)
+const container = IocContainer.getInstance()
+const commandBus = container.get<MessageBus>(types.CommandBus)
+const post = await commandBus.dispatch<PostViewDTO>(command)
 
-const post = Astro.props
+if(!post) return Astro.redirect('./404')
+	
 const MAX_POSTS = 3
-const getRelatedPosts = (post: Props) => {
-	const relatedPosts = posts.filter(
-		(p) => p.slug !== post.slug && p.data.tags.some((t: any) => post.data.tags.includes(t))
-	)
-	return relatedPosts.slice(0, MAX_POSTS)
+const getRelatedPosts = (post: any) => {
+	return []
 }
+
+type Heading = {
+	depth: number
+	text: string
+	slug: string
+	subheadings: Heading[]
+}
+
 
 const relatedPosts = getRelatedPosts(post)
-
-const { Content, headings, remarkPluginFrontmatter } = await post.render()
+const headings: Heading[] = []
 ---
 
 <BlogPost
 	id={post.id}
 	data={post.data}
 	headings={headings}
-	readTime={remarkPluginFrontmatter.minutesRead}
+	readTime={10}
 >
 	<div class='grid grid-cols-1 md:grid-cols-[20%_auto] gap-10 mt-8'>
 		<!-- aside  -->
