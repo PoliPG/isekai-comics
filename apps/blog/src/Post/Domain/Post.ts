@@ -8,4 +8,8 @@ export default class Post {
     this.metaDescription = metaDescription
     this.metaTitle = metaTitle
   }
+
+  getID() {
+    return this.id
+  }
 }

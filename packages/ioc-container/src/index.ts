@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { Container, injectable, inject } from 'inversify'
+import { Container, injectable, inject, ContainerModule } from 'inversify'
 
 class IocContainer extends Container {
   private static instance: IocContainer | null = null
@@ -15,5 +15,5 @@ class IocContainer extends Container {
     return IocContainer.instance
   }
 }
-
-export { injectable, inject, IocContainer }
+export * from 'inversify'
+export { IocContainer }

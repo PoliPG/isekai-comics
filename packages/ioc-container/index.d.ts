@@ -1,9 +1,10 @@
 import 'reflect-metadata';
-import { Container, injectable, inject } from 'inversify';
+import { Container } from 'inversify';
 declare class IocContainer extends Container {
     private static instance;
     private constructor();
     static getInstance(): IocContainer;
 }
-export { injectable, inject, IocContainer };
+export * from 'inversify';
+export { IocContainer };
 //# sourceMappingURL=index.d.ts.map

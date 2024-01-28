@@ -6,5 +6,5 @@ export {
   getTags,
   getPostByTag,
   filterPostsByCategory,
-} from './post'
+} from '../Post/Infrastructure/post'
 export { remarkReadingTime } from './readTime'
