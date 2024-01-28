@@ -1,0 +1,19 @@
+{
+  "name": "ioc-container",
+  "version": "0.0.1",
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "node ./index.ts"
+  },
+  "dependencies": {
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.1.14",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.9.4"
+  }
+}
