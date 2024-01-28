@@ -1,4 +1,6 @@
 import { Strapi } from '@strapi/strapi'
+import { container } from './container'
+import { EntityService } from '@strapi/strapi'
 
 export default {
   /**
@@ -9,6 +11,11 @@ export default {
    */
   register({ strapi }: { strapi: Strapi }) {
     // ...
+
+    if (strapi.entityService)
+      container
+        .bind<EntityService.EntityService>('EntityService')
+        .toConstantValue(strapi.entityService)
   },
   /**
    * An asynchronous bootstrap function that runs before

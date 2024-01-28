@@ -20,6 +20,7 @@
     "@strapi/plugin-users-permissions": "4.15.5-alpha.5",
     "@strapi/strapi": "4.15.5-alpha.5",
     "pg": "^8.11.3",
+    "ioc-container": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "5.3.4",

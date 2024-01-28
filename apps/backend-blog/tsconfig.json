@@ -4,14 +4,11 @@
     "outDir": "dist",
     "rootDir": ".",
     "allowJs": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
-  "include": [ 
-    "./",
-  "./**/*.ts",
-  "./**/*.js",
-  "src/**/*.json"
-],
+  "include": ["./", "./**/*.ts", "./**/*.js", "src/**/*.json"],
   "exclude": [
     "node_modules/",
     "build/",
