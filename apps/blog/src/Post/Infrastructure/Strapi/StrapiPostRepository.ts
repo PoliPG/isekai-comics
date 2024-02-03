@@ -1,8 +1,8 @@
-import type StrapiAPI from 'src/Shared/Infrastructure/Strapi/StrapiAPI'
-import Post from '../../Domain/Post'
-import type { PostRepository } from '../../Domain/PostRepository'
-import { PostNotFound } from 'src/Post/Domain/errors/PostNotFound'
-import type { StrapiEntityApiDTO } from 'src/Shared/Infrastructure/Strapi/DTO/StrapiEntityApiDTO'
+import Post from '@post/Domain/Post'
+import type { PostRepository } from '@post/Domain/PostRepository'
+import { PostNotFound } from '@post/Domain/errors/PostNotFound'
+import type { StrapiEntityApiDTO } from '@shared/Api/Infrastructure/Strapi/DTO/StrapiEntityApiDTO'
+import type StrapiAPI from '@shared/Api/Infrastructure/Strapi/StrapiAPI'
 
 interface StrapiPost {
   id: number

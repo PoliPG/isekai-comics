@@ -1,6 +1,6 @@
-import type { Message } from 'message-bus'
+import type { Command } from 'src/Shared/Command/Commad'
 
-export class PostViewCommand implements Message {
+export class PostViewCommand implements Command {
   readonly id: number
 
   getName(): string {

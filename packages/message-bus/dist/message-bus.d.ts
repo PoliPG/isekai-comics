@@ -3,7 +3,8 @@ export declare class MessageBus implements Bus {
     private subscribers;
     private static nextId;
     constructor();
-    dispatch<T>(message: Message): Promise<T | void>;
+    commit<T extends object>(message: Message): Promise<T>;
+    dispatch(message: Message): Promise<void>;
     register(event: string, callback: Callable): Registry;
     private getSuscribers;
     private getNextId;

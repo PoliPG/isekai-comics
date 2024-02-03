@@ -8,13 +8,18 @@ class MessageBus {
     constructor() {
         this.subscribers = new types_1.Subscriber();
     }
+    async commit(message) {
+        const messageSuscribers = this.getSuscribers(message.getName());
+        if (messageSuscribers === undefined) {
+            throw new Error('Not suscriber found');
+        }
+        return messageSuscribers[0].callable.handle(message);
+    }
     async dispatch(message) {
         const messageSuscribers = this.getSuscribers(message.getName());
         if (messageSuscribers === undefined) {
             throw new Error('Not suscriber found');
         }
-        if (messageSuscribers.length === 1)
-            return messageSuscribers[0].callable.handle(message);
         for (let i = 0; i <= messageSuscribers.length; i++) {
             await messageSuscribers[i].callable.handle(message);
         }

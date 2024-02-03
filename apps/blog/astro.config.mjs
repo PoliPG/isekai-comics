@@ -5,7 +5,7 @@ import tailwind from '@astrojs/tailwind'
 import { remarkReadingTime } from './src/utils/readTime.ts'
 import node from '@astrojs/node'
 import { config } from 'dotenv'
-import containerIntegration from './src/Shared/Infrastructure/Container/integration.ts'
+import containerIntegration from './src/Shared/Container/Infrastructure/Astro/integration.ts'
 
 config()
 

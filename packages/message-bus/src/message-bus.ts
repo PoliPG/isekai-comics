@@ -15,15 +15,22 @@ export class MessageBus implements Bus {
     this.subscribers = new Subscriber()
   }
 
-  public async dispatch<T>(message: Message): Promise<T | void> {
+  public async commit<T extends object>(message: Message): Promise<T> {
     const messageSuscribers = this.getSuscribers(message.getName())
 
     if (messageSuscribers === undefined) {
       throw new Error('Not suscriber found')
     }
 
-    if (messageSuscribers.length === 1)
-      return messageSuscribers[0].callable.handle<T>(message)
+    return messageSuscribers[0].callable.handle(message)
+  }
+
+  public async dispatch(message: Message): Promise<void> {
+    const messageSuscribers = this.getSuscribers(message.getName())
+
+    if (messageSuscribers === undefined) {
+      throw new Error('Not suscriber found')
+    }
 
     for (let i = 0; i <= messageSuscribers.length; i++) {
       await messageSuscribers[i].callable.handle(message)

@@ -7,7 +7,7 @@ export interface Message {
 }
 
 export interface Callable {
-  handle<T>(message: Message): Promise<T>
+  handle(message: Message): Promise<any>
 }
 
 export interface SuscriberCallabe {
@@ -18,6 +18,7 @@ export interface SuscriberCallabe {
 export class Subscriber extends Map<string, SuscriberCallabe[]> {}
 
 export interface Bus {
-  dispatch<T>(message: Message): Promise<T | void>
+  commit<T extends object>(message: Message): Promise<T>
+  dispatch(message: Message): Promise<void>
   register(event: string, callback: Callable): Registry
 }

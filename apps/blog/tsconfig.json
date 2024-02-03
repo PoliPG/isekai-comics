@@ -3,7 +3,6 @@
   "compilerOptions": {
     "strictNullChecks": true,
     "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
@@ -14,7 +13,9 @@
       "@/utils": ["src/utils/index.ts"],
       "@/data/*": ["src/data/*"],
       "@/site-config": ["src/data/site.config.ts"],
-      "@/styles": ["src/styles/"]
+      "@/styles": ["src/styles/"],
+      "@post/*": ["src/Post/*"],
+      "@shared/*": ["src/Shared/*"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]

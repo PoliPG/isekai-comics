@@ -2,10 +2,14 @@
   "name": "ioc-container",
   "version": "0.0.1",
   "main": "./index.js",
+  "module": "./src/index.ts",
   "types": "./index.d.js",
   "license": "MIT",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./index.js"
+    }
   },
   "scripts": {
     "build": "tsc --project ./tsconfig.json"
