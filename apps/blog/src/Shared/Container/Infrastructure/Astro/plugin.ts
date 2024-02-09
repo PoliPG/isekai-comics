@@ -1,7 +1,7 @@
 import { IocContainer } from 'ioc-container'
-import { PostModule } from 'src/Post/Infrastructure/PostModule'
-import { AppModule } from 'src/AppModule'
-import { PostConfig } from 'src/Post/PostsConfig'
+import PostModule from '../../../../Post/Infrastructure/PostModule'
+import { AppModule } from '../../../../AppModule'
+import { PostConfig } from '../../../../Post/PostsConfig'
 
 /**
  * @type {import('astro').DevToolbarApp}

@@ -23,4 +23,4 @@ const PostModule = new ContainerModule(
   },
 )
 
-export { PostModule }
+export default PostModule

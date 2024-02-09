@@ -1,8 +1,10 @@
-import Post from '@post/Domain/Post'
-import type { PostRepository } from '@post/Domain/PostRepository'
-import { PostNotFound } from '@post/Domain/errors/PostNotFound'
-import type { StrapiEntityApiDTO } from '@shared/Api/Infrastructure/Strapi/DTO/StrapiEntityApiDTO'
-import type StrapiAPI from '@shared/Api/Infrastructure/Strapi/StrapiAPI'
+import Post from '../../Domain/Post'
+import type { PostRepository } from '../../Domain/PostRepository'
+import { PostNotFound } from '../../Domain/errors/PostNotFound'
+import type { StrapiEntityApiDTO } from '../../../Shared/Api/Infrastructure/Strapi/DTO/StrapiEntityApiDTO'
+import { inject, injectable } from 'ioc-container'
+import type { HttpService } from 'src/Shared/Api/Domain/HttpService'
+import types from '../../../types'
 
 interface StrapiPost {
   id: number
@@ -11,10 +13,11 @@ interface StrapiPost {
   MetaDescription: string
 }
 
+@injectable()
 export class StrapiPostRepository implements PostRepository {
   private endpoint: string = 'posts'
 
-  constructor(private api: StrapiAPI) {}
+  constructor(@inject(types.BackendApi) private api: HttpService) {}
 
   async findOrFail(id: number): Promise<Post> {
     const response = await this.api.get<StrapiEntityApiDTO<StrapiPost>>(

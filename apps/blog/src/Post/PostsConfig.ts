@@ -1,8 +1,8 @@
 import { IocContainer } from 'ioc-container'
 import Types from '../types'
 import PostTypes from './types'
-import type { MessageBus } from 'message-bus'
 import PostViewHandler from './Application/post-view/PostViewHandler'
+import type { MessageBus } from 'message-bus'
 
 export class PostConfig {
   static init() {

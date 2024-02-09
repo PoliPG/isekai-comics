@@ -6,10 +6,10 @@ import Share from '@/components/Share'
 import TableOfContents from '@/components/TableOfContents'
 import SButton from '@/components/mdx/SButton'
 import { IocContainer } from 'ioc-container'
-import { MessageBus } from 'message-bus'
 import types from 'src/types'
 import { PostViewCommand } from 'src/Post/Application/post-view/PostViewCommand'
 import { PostViewDTO } from 'src/Post/Application/post-view/DTO/PostViewDTO'
+import type { MessageBus } from 'message-bus'
 
 export const prerender = false // server
 const {slug} = Astro.params

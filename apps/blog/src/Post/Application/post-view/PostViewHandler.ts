@@ -1,8 +1,8 @@
 import { inject, injectable } from 'ioc-container'
-import type { PostRepository } from 'src/Post/Domain/PostRepository'
-import TYPES from 'src/Post/types'
+import type { PostRepository } from '../../Domain/PostRepository'
+import TYPES from '../../types'
 import { PostViewDTO } from './DTO/PostViewDTO'
-import type { CommandHandler } from 'src/Shared/Command/CommandHandler'
+import type { CommandHandler } from '../../../Shared/Command/CommandHandler'
 import type { PostViewCommand } from './PostViewCommand'
 
 @injectable()

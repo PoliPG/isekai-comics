@@ -1,4 +1,4 @@
-import type { Query } from 'src/Shared/Application/Query/Query'
+import type { Query } from '../../../Shared/Query/Query'
 
 export class FindPost implements Query {
   readonly id: number

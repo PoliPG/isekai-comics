@@ -15,6 +15,7 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),
+  base: '',
   site: process.env.BASE_URL, // Write here your website url
   markdown: {
     remarkPlugins: [remarkReadingTime],

@@ -1,4 +1,4 @@
-import type { Command } from 'src/Shared/Command/Commad'
+import type { Command } from '../../../Shared/Command/Commad'
 
 export class PostViewCommand implements Command {
   readonly id: number

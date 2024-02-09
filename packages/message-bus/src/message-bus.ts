@@ -7,6 +7,7 @@ import {
   SuscriberCallabe,
 } from './types'
 
+
 export class MessageBus implements Bus {
   private subscribers: Subscriber
   private static nextId = 0

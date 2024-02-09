@@ -1,4 +1,4 @@
-import type Post from 'src/Post/Domain/Post'
+import type Post from '../../../Domain/Post'
 
 export class PostViewDTO {
   readonly id: number
