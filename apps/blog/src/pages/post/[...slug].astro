@@ -22,6 +22,8 @@ const container = ContainerDI.getInstance()
 const commandBus = container.get<MessageBus>(types.CommandBus)
 const post = await commandBus.commit<PostViewDTO>(command)
 
+console.log(post)
+
 if (!post) {
   return new Response(null, {
     status: 404,
@@ -48,7 +50,7 @@ const headings: Heading[] = []
 
 <BlogPost
 	id={post.id}
-	data={""}
+	data={post}
 	headings={headings}
 	readTime={"10"}
 >

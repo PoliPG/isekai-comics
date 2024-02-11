@@ -1,5 +1,17 @@
+import { HttpError } from '../../Domain/errors/HttpError'
+import axios, { type AxiosInstance, isAxiosError } from 'axios'
+
 export default class StrapiAPI {
-  private baseURL: string = import.meta.env.STRAPI_URL
+  private httpInstance: AxiosInstance
+
+  constructor() {
+    const baseURL: string = import.meta.env.STRAPI_URL
+    const authToken: string = import.meta.env.STRAPI_API_TOKEN
+    this.httpInstance = axios.create({
+      baseURL: `${baseURL}/api/`,
+      headers: { Authorization: `Bearer ${authToken}` },
+    })
+  }
 
   /**
    * Obtiene datos de la API de Strapi.
@@ -12,16 +24,14 @@ export default class StrapiAPI {
       endpoint = endpoint.slice(1)
     }
 
-    const url = new URL(`${this.baseURL}/api/${endpoint}`)
-
-    if (query) {
-      Object.entries(query).forEach(([key, value]) => {
-        url.searchParams.append(key, value)
-      })
+    try {
+      const response = await this.httpInstance.get<T>(endpoint, { data: query })
+      return response.data
+    } catch (e) {
+      if (isAxiosError(e)) {
+        throw HttpError.createFromCode(parseInt(e.code ?? '500'))
+      }
+      throw e
     }
-    const res = await fetch(url.toString())
-    let data = await res.json()
-
-    return data as T
   }
 }

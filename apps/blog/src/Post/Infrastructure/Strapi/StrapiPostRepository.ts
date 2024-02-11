@@ -5,12 +5,19 @@ import type { StrapiEntityApiDTO } from '../../../Shared/Api/Infrastructure/Stra
 import { inject, injectable } from 'ioc-container'
 import type { HttpService } from 'src/Shared/Api/Domain/HttpService'
 import types from '../../../Shared/Container/types'
+import type { string } from 'astro/zod'
 
 interface StrapiPost {
   id: number
-  Title: string
-  MetaTitle: string
-  MetaDescription: string
+  attributes: {
+    Title: string
+    MetaTitle: string
+    MetaDescription: string
+    createdAt: string
+    updatedAt: string
+    publishedAt: string
+    Content: string
+  }
 }
 
 @injectable()
@@ -25,6 +32,12 @@ export class StrapiPostRepository implements PostRepository {
     )
     if (!response.data) throw PostNotFound.createFromId(id)
     const post = response.data
-    return new Post(post.id, post.MetaTitle, post.MetaDescription)
+    const attributes = post.attributes
+    return new Post(
+      post.id,
+      attributes.Title,
+      attributes.MetaTitle,
+      attributes.MetaDescription,
+    )
   }
 }
