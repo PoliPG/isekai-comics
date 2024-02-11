@@ -1,8 +1,8 @@
 import { ContainerModule, type interfaces } from 'ioc-container'
-import type { PostRepository } from '../Domain/PostRepository'
-import { StrapiPostRepository } from './Strapi/StrapiPostRepository'
-import TYPES from '../types'
-import PostViewHandler from '../Application/post-view/PostViewHandler'
+import type { PostRepository } from '../../../../Post/Domain/PostRepository'
+import { StrapiPostRepository } from '../../../../Post/Infrastructure/Strapi/StrapiPostRepository'
+import TYPES from '../../types'
+import PostViewHandler from '../../../../Post/Application/post-view/PostViewHandler'
 
 const PostModule = new ContainerModule(
   (

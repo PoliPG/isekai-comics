@@ -13,7 +13,7 @@ config()
 export default defineConfig({
   output: 'hybrid',
   adapter: node({
-    mode: 'standalone',
+    mode: 'middleware',
   }),
   base: '',
   site: process.env.BASE_URL, // Write here your website url

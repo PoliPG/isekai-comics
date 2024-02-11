@@ -2,7 +2,7 @@ import type { FindPost } from './FindPost'
 import type { QueryHandler } from '../../../Shared/Query/QueryHandler'
 import { inject, injectable } from 'ioc-container'
 import type { PostRepository } from '../../Domain/PostRepository'
-import TYPES from '../../types'
+import TYPES from '../../../Shared/Container/types'
 import { PostDTO } from '../DTO/PostDTO'
 
 @injectable()

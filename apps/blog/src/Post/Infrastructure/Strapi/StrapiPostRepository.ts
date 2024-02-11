@@ -4,7 +4,7 @@ import { PostNotFound } from '../../Domain/errors/PostNotFound'
 import type { StrapiEntityApiDTO } from '../../../Shared/Api/Infrastructure/Strapi/DTO/StrapiEntityApiDTO'
 import { inject, injectable } from 'ioc-container'
 import type { HttpService } from 'src/Shared/Api/Domain/HttpService'
-import types from '../../../types'
+import types from '../../../Shared/Container/types'
 
 interface StrapiPost {
   id: number

@@ -1,17 +1,17 @@
 import 'reflect-metadata'
-import { Container, injectable, inject, ContainerModule } from 'inversify'
+import { Container } from 'inversify'
 
 class IocContainer extends Container {
   private static instance: IocContainer | null = null
 
-  private constructor() {
+  constructor() {
     super()
   }
 
-  static getInstance() {
-    if (IocContainer.instance === null) {
-      IocContainer.instance = new IocContainer()
-    }
+  static getInstance(): IocContainer {
+    if (IocContainer.instance !== null) return IocContainer.instance
+    console.log('NEW CONTAINER ---------------------------------- ')
+    IocContainer.instance = new IocContainer()
     return IocContainer.instance
   }
 }

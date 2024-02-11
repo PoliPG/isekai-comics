@@ -5,18 +5,20 @@ import ListRelatedPosts from '@/components/ListRelatedPosts'
 import Share from '@/components/Share'
 import TableOfContents from '@/components/TableOfContents'
 import SButton from '@/components/mdx/SButton'
-import { IocContainer } from 'ioc-container'
-import types from 'src/types'
+import { ContainerDI } from '../../Shared/Container/ContainerDI'
+import types from '../../Shared/Container/types'
 import { PostViewCommand } from 'src/Post/Application/post-view/PostViewCommand'
 import { PostViewDTO } from 'src/Post/Application/post-view/DTO/PostViewDTO'
 import type { MessageBus } from 'message-bus'
 
+
 export const prerender = false // server
 const {slug} = Astro.params
 
+
 /* */
 const command = new PostViewCommand(1)
-const container = IocContainer.getInstance()
+const container = ContainerDI.getInstance()
 const commandBus = container.get<MessageBus>(types.CommandBus)
 const post = await commandBus.commit<PostViewDTO>(command)
 
