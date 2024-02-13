@@ -14,7 +14,7 @@ class PostViewHandler implements CommandHandler<PostViewDTO> {
   }
 
   async handle(command: PostViewCommand): Promise<PostViewDTO> {
-    const post = await this.postRepository.findOrFail(command.id)
+    const post = await this.postRepository.findBySlugOrFail(command.slug)
     return new PostViewDTO(post)
   }
 }

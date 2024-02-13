@@ -6,4 +6,8 @@ export class PostNotFound extends Error {
   static createFromId(id: number) {
     return new PostNotFound(`Post ${id} not found`)
   }
+
+  static createFromSlug(slug: string) {
+    return new PostNotFound(`Post with slug: ${slug}. Not found`)
+  }
 }

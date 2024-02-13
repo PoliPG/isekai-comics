@@ -5,7 +5,7 @@ import Post from '../../Domain/Post'
 import { EntityService, Registry, Common, UID, Attribute } from '@strapi/strapi'
 
 export type StrapiDbPost = EntityService.Entity<'api::post.post'>
-export type StrapiDbPostContentBlocks = StrapiDbPost['ContentBlocks']
+export type StrapiDbPostContentBlocks = StrapiDbPost['contentBlocks']
 export type ContentComponents = Registry.Keys<
   Common.Schemas,
   UID.Component<'content'>
@@ -17,22 +17,22 @@ export type DynamicZoneValue = Attribute.GetDynamicZoneValue<
 export class StrapiDbPostMapper {
   static createFromDB(post: StrapiDbPost): Post {
     let contentBlocks: PostContent[] = []
-    if (post.ContentBlocks)
-      contentBlocks = post.ContentBlocks.map((contentBlock) => {
+    if (post.contentBlocks)
+      contentBlocks = post.contentBlocks.map((contentBlock) => {
         return StrapiDbPostMapper.createContentBlock(contentBlock)
       })
 
     return new Post(
       post.id as number,
-      post.Title,
-      post.MetaTitle,
-      post.MetaDescription,
-      contentBlocks,
+      post.title,
+      post.metaTitle,
+      post.metaDescription,
+      contentBlocks
     )
   }
 
   private static createContentBlock(
-    contentBlock: DynamicZoneValue,
+    contentBlock: DynamicZoneValue
   ): PostContent {
     switch (contentBlock.__component) {
       case 'content.content-block':

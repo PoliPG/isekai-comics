@@ -372,27 +372,28 @@ export interface ApiPostPost extends Schema.CollectionType {
     draftAndPublish: true
   }
   attributes: {
-    Title: Attribute.String & Attribute.Required
-    MetaTitle: Attribute.String &
+    title: Attribute.String & Attribute.Required
+    metaTitle: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
         maxLength: 60
       }>
-    MetaDescription: Attribute.String &
+    metaDescription: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{
         maxLength: 150
       }>
-    Content: Attribute.RichText &
+    content: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor5.CKEditor',
         {
           preset: 'custom'
         }
       >
-    ContentBlocks: Attribute.DynamicZone<
+    contentBlocks: Attribute.DynamicZone<
       ['content.content-block', 'content.iframe-product']
     >
+    slug: Attribute.String & Attribute.Required & Attribute.Unique
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime

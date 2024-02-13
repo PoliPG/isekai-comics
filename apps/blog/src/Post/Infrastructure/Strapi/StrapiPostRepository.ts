@@ -1,22 +1,23 @@
-import Post from '../../Domain/Post'
-import type { PostRepository } from '../../Domain/PostRepository'
-import { PostNotFound } from '../../Domain/errors/PostNotFound'
-import type { StrapiEntityApiDTO } from '../../../Shared/Api/Infrastructure/Strapi/DTO/StrapiEntityApiDTO'
+import Post from '@/Post/Domain/Post'
+import type { PostRepository } from '@/Post/Domain/PostRepository'
+import { PostNotFound } from '@/Post/Domain/errors/PostNotFound'
+import type { StrapiEntityApiDTO } from '@/Shared/Api/Infrastructure/Strapi/DTO/StrapiEntityApiDTO'
 import { inject, injectable } from 'ioc-container'
 import type { HttpService } from 'src/Shared/Api/Domain/HttpService'
-import types from '../../../Shared/Container/types'
-import type { string } from 'astro/zod'
+import types from '@/Shared/Container/types'
+import type { StrapiListingApiDTO } from '@/Shared/Api/Infrastructure/Strapi/DTO/StrapiListingApiDTO'
 
 interface StrapiPost {
   id: number
   attributes: {
-    Title: string
-    MetaTitle: string
-    MetaDescription: string
+    title: string
+    metaTitle: string
+    metaDescription: string
     createdAt: string
     updatedAt: string
     publishedAt: string
-    Content: string
+    content: string
+    slug: string
   }
 }
 
@@ -35,9 +36,30 @@ export class StrapiPostRepository implements PostRepository {
     const attributes = post.attributes
     return new Post(
       post.id,
-      attributes.Title,
-      attributes.MetaTitle,
-      attributes.MetaDescription,
+      attributes.title,
+      attributes.metaTitle,
+      attributes.metaDescription,
+      attributes.slug,
+      attributes.content,
+      new Date(attributes.createdAt),
+    )
+  }
+
+  async findBySlugOrFail(slug: string): Promise<Post> {
+    const response = await this.api.get<StrapiListingApiDTO<StrapiPost>>(
+      `${this.endpoint}?filters[slug][$eq]=${slug}`,
+    )
+    if (response.data.length === 0) throw PostNotFound.createFromSlug(slug)
+    const post = response.data[0]
+    const attributes = post.attributes
+    return new Post(
+      post.id,
+      attributes.title,
+      attributes.metaTitle,
+      attributes.metaDescription,
+      attributes.slug,
+      attributes.content,
+      new Date(attributes.createdAt),
     )
   }
 }

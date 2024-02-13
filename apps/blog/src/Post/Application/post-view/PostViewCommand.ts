@@ -1,13 +1,13 @@
-import type { Command } from '../../../Shared/Command/Commad'
+import type { Command } from '@/Shared/Command/Commad'
 
 export class PostViewCommand implements Command {
-  readonly id: number
+  readonly slug: string
 
   getName(): string {
     return this.constructor.name
   }
 
-  constructor(id: number) {
-    this.id = id
+  constructor(slug: string) {
+    this.slug = slug
   }
 }

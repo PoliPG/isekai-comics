@@ -1,36 +1,45 @@
 ---
 import BlogPost from '@/layouts/BlogPost'
-import Code from '@/components/mdx/Code'
 import ListRelatedPosts from '@/components/ListRelatedPosts'
 import Share from '@/components/Share'
 import TableOfContents from '@/components/TableOfContents'
-import SButton from '@/components/mdx/SButton'
-import { ContainerDI } from '../../Shared/Container/ContainerDI'
-import types from '../../Shared/Container/types'
-import { PostViewCommand } from 'src/Post/Application/post-view/PostViewCommand'
-import { PostViewDTO } from 'src/Post/Application/post-view/DTO/PostViewDTO'
+import { ContainerDI } from '@/Shared/Container/ContainerDI'
+import types from '@/Shared/Container/types'
+import { PostViewCommand } from '@/Post/Application/post-view/PostViewCommand'
+import { PostViewDTO } from '@/Post/Application/post-view/DTO/PostViewDTO'
 import type { MessageBus } from 'message-bus'
-
+import { PostNotFound } from '@/Post/Domain/errors/PostNotFound'
+import Html from '@/components/Html'
 
 export const prerender = false // server
 const {slug} = Astro.params
+let post = null
 
 
-/* */
-const command = new PostViewCommand(1)
-const container = ContainerDI.getInstance()
-const commandBus = container.get<MessageBus>(types.CommandBus)
-const post = await commandBus.commit<PostViewDTO>(command)
-
-console.log(post)
-
-if (!post) {
+if(!slug) {
   return new Response(null, {
     status: 404,
-    statusText: 'No encontrado'
+    statusText: 'Post not found'
   });
 }
-	
+
+try {
+  const command = new PostViewCommand(slug)
+  const container = ContainerDI.getInstance()
+  const commandBus = container.get<MessageBus>(types.CommandBus)
+  post = await commandBus.commit<PostViewDTO>(command)
+}
+catch(error) {
+  if(error instanceof PostNotFound)
+	return new Response(null, {
+		status: 404,
+		statusText: 'No encontrado'
+	});
+
+  return new Response(null, {status: 500, statusText: "Hubo un error en el servidor."})
+}
+
+
 const MAX_POSTS = 3
 const getRelatedPosts = (post: any) => {
 	return []
@@ -66,6 +75,7 @@ const headings: Heading[] = []
 		<!-- post -->
 		<article class='max-w-full w-full'>
 			<div class='prose prose-lg md:prose-xl dark:prose-invert mb-12 min-w-full'>
+				<div set:html={post.content} />
 			</div>
 
 			<!-- related posts -->

@@ -7,6 +7,7 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
+      "@/*": ["src/*"],
       "@/components/*": ["src/components/*.astro"],
       "@/layouts/*": ["src/layouts/*.astro"],
       "@/utils": ["src/utils/index.ts"],
@@ -15,5 +16,6 @@
       "@/styles": ["src/styles/"]
     }
   },
+  "include": ["**/*.ts", "**/*.astro"],
   "exclude": ["node_modules", "**/node_modules/*", ".vscode", "dist"]
 }

@@ -12,33 +12,38 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "MetaTitle": {
+    "metaTitle": {
       "type": "string",
       "maxLength": 60,
       "required": true
     },
-    "MetaDescription": {
+    "metaDescription": {
       "type": "string",
       "maxLength": 150,
       "required": true
     },
-    "Content": {
+    "content": {
       "type": "customField",
       "options": {
         "preset": "custom"
       },
       "customField": "plugin::ckeditor5.CKEditor"
     },
-    "ContentBlocks": {
+    "contentBlocks": {
       "type": "dynamiczone",
       "components": [
         "content.content-block",
         "content.iframe-product"
       ]
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

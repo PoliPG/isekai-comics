@@ -17,7 +17,7 @@ export class StrapiDbPostRepository implements PostRepository {
 
   async findOrFail(id: number): Promise<Post> {
     const post = await this.strapiEntityService.findOne('api::post.post', id, {
-      populate: { ContentBlocks: true },
+      populate: { contentBlocks: true },
     })
 
     if (post === null) throw PostNotFound.createFromId(id)

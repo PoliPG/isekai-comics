@@ -5,11 +5,11 @@ import Footer from '@/components/Footer'
 import ProviderTheme from '@/components/ProviderTheme'
 import ProviderAnimations from '@/components/ProviderAnimations'
 import TwSizeIndicator from '@/components/TwSizeIndicator'
-import EditBlog from '@/components/editBlog'
+
 const { title, description } = Astro.props
 ---
 
-<html lang='en' class='scroll-smooth'>
+<html lang='es' class='scroll-smooth'>
 	<head>
 		<BaseHead title={title} description={description} ogImage={''} articleDate={''} />
 		<ProviderTheme />
@@ -25,6 +25,5 @@ const { title, description } = Astro.props
 			<Footer />
 		</main>
 		<TwSizeIndicator />
-		<EditBlog />
 	</body>
 </html>
