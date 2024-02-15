@@ -9,11 +9,10 @@ import { PostViewCommand } from '@/Post/Application/post-view/PostViewCommand'
 import { PostViewDTO } from '@/Post/Application/post-view/DTO/PostViewDTO'
 import type { MessageBus } from 'message-bus'
 import { PostNotFound } from '@/Post/Domain/errors/PostNotFound'
-import Html from '@/components/Html'
 
 export const prerender = false // server
 const {slug} = Astro.params
-let post = null
+let post!: PostViewDTO
 
 
 if(!slug) {

@@ -1,8 +1,9 @@
 import { ContainerModule, type interfaces } from 'ioc-container'
-import type { PostRepository } from '../../../../Post/Domain/PostRepository'
-import { StrapiPostRepository } from '../../../../Post/Infrastructure/Strapi/StrapiPostRepository'
+import type { PostRepository } from '@/Post/Domain/PostRepository'
+import { StrapiPostRepository } from '@/Post/Infrastructure/Strapi/StrapiPostRepository'
 import TYPES from '../../types'
-import PostViewHandler from '../../../../Post/Application/post-view/PostViewHandler'
+import PostViewHandler from '@/Post/Application/post-view/PostViewHandler'
+import GetPostsCommandHandler from '@/Post/Application/get-posts/GetPostsCommandHandler'
 
 const PostModule = new ContainerModule(
   (
@@ -19,6 +20,9 @@ const PostModule = new ContainerModule(
       .inSingletonScope()
     bind<PostViewHandler>(TYPES.PostViewHandler)
       .to(PostViewHandler)
+      .inSingletonScope()
+    bind<GetPostsCommandHandler>(TYPES.GetPostHandler)
+      .to(GetPostsCommandHandler)
       .inSingletonScope()
   },
 )

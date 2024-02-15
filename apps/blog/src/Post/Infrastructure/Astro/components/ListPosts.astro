@@ -1,10 +1,10 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-import PostCard from '@/components/PostCard'
+import PostCard from '@/Post/Infrastructure/Astro/components/PostCard.astro'
 import { cn } from '@/utils'
+import type { PostListDTO } from '@/Post/Application/get-posts/DTO/PostListDTO'
 
 type Props = {
-	posts: CollectionEntry<'blog'>[]
+	posts: PostListDTO[]
 	FirstBig?: boolean
 }
 
@@ -19,15 +19,8 @@ const { posts, FirstBig = false } = Astro.props
 >
 	{
 		posts.map(async (post) => {
-			const { remarkPluginFrontmatter } = await post.render()
-
 			return (
-				<PostCard
-					id={post.id}
-					data={post.data}
-					slug={post.slug}
-					readTime={remarkPluginFrontmatter.minutesRead}
-				/>
+				<PostCard post={post} />
 			)
 		})
 	}

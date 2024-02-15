@@ -48,4 +48,8 @@ export default class Post {
   get content(): string {
     return this._content
   }
+
+  get slug(): string {
+    return this._slug
+  }
 }

@@ -62,4 +62,23 @@ export class StrapiPostRepository implements PostRepository {
       new Date(attributes.createdAt),
     )
   }
+
+  async getPosts(): Promise<Post[]> {
+    const response = await this.api.get<StrapiListingApiDTO<StrapiPost>>(
+      `${this.endpoint}`,
+    )
+    const posts = response.data
+    return posts.map((post) => {
+      const attributes = post.attributes
+      return new Post(
+        post.id,
+        attributes.title,
+        attributes.metaTitle,
+        attributes.metaDescription,
+        attributes.slug,
+        attributes.content,
+        new Date(attributes.createdAt),
+      )
+    })
+  }
 }
