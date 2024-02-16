@@ -5,7 +5,6 @@ import { ContainerDI } from '@/Shared/Container/ContainerDI'
 import types from '@/Shared/Container/types'
 import ListCategories from '@/components/ListCategories'
 import ListPosts from '@/Post/Infrastructure/Astro/components/ListPosts.astro'
-import TitlePage from '@/components/TitlePage'
 import BaseLayout from '@/layouts/BaseLayout'
 import type { MessageBus } from 'message-bus'
 
@@ -24,7 +23,6 @@ catch(error) {
 ---
 
 <BaseLayout title='Home'>
-	<TitlePage title='Isekai Comics' />
 	<ListCategories />
 
 	<div>

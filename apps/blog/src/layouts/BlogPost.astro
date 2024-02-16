@@ -6,8 +6,6 @@ import type { MarkdownHeading } from 'astro'
 import { Image } from 'astro:assets'
 import type { PostViewDTO } from '../Post/Application/post-view/DTO/PostViewDTO'
 
-
-
 type Props = {
 	id: number
 	data: PostViewDTO
@@ -17,9 +15,7 @@ type Props = {
 
 const { data, readTime, headings, id } = Astro.props
 const { title, metaDescription, createdAt, imageUrl } = data
-const heroImage = null
 const tags: string[] = []
-
 ---
 
 <BaseLayout
@@ -39,11 +35,9 @@ const tags: string[] = []
 						- {readTime}
 					</p>
 				</div>
-				<h1 class='text-center mb-4 text-4xl md:text-5xl md:pb-2.5 font-semibold'>
+				<h1 class='text-center text-4xl md:text-5xl md:pb-2.5 font-semibold'>
 					{title}
 				</h1>
-				<img src={imageUrl} />
-
 			</div>
 
 			<div class='flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5'>
@@ -53,9 +47,9 @@ const tags: string[] = []
 
 		<>
 			{
-				heroImage && (
+				imageUrl && (
 					<Image
-						src={heroImage}
+						src={imageUrl}
 						width={1000}
 						height={500}
 						quality={100}
@@ -75,56 +69,3 @@ const tags: string[] = []
 		</div>
 	</article>
 </BaseLayout>
-
-<script>
-	const fnObserver = () => {
-		function handleIntersection(
-			entries: IntersectionObserverEntry[],
-			observer: IntersectionObserver
-		) {
-			entries.forEach((entry) => {
-				const index = document.querySelector(`aside a[href="#${entry.target.id}"]`)
-
-				if (entry.isIntersecting) {
-					index?.classList.remove('bg-slate-200', 'dark:bg-slate-800') // remove bg
-					index?.classList.add(
-						'bg-indigo-600',
-						'dark:bg-indigo-700',
-						'text-white',
-						'font-bold',
-						'transition-colors',
-						'duration-200'
-					)
-				} else {
-					index?.classList.add('bg-slate-200', 'dark:bg-slate-800') // add bg
-					index?.classList.remove(
-						'bg-indigo-600',
-						'dark:bg-indigo-700',
-						'text-white',
-						'font-bold',
-						'transition-colors',
-						'duration-200'
-					)
-				}
-			})
-		}
-
-		const headings = document.querySelectorAll(
-			'div.prose h1, div.prose h2, div.prose h3, div.prose h4, div.prose h5, div.prose h6'
-		)
-
-		const options = {
-			root: null,
-			rootMargin: ' 15% 0px 0% 0px ',
-			threshold: 1
-		}
-
-		const observer = new IntersectionObserver(handleIntersection, options)
-
-		headings.forEach((heading) => {
-			observer.observe(heading)
-		})
-	}
-	fnObserver()
-	document.addEventListener('astro:after-swap', fnObserver)
-</script>

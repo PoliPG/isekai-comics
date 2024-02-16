@@ -8,19 +8,15 @@ class ContainerDI extends Container {
 
   private constructor() {
     super()
+    this.load(PostModule, AppModule)
+    PostConfig.init(this)
   }
 
   static getInstance(): ContainerDI {
     if (ContainerDI.instance === null) {
       ContainerDI.instance = new ContainerDI()
-      this.init()
     }
     return ContainerDI.instance
-  }
-
-  private static init() {
-    ContainerDI.instance!.load(PostModule, AppModule)
-    PostConfig.init(ContainerDI.instance!)
   }
 }
 

@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout'
 import ListPosts from '@/Post/Infrastructure/Astro/components/ListPosts.astro'
-import TitlePage from '@/components/TitlePage'
 import { getTags, getPostByTag } from '@/utils'
 
 export async function getStaticPaths() {
@@ -19,6 +18,5 @@ const posts = await getPostByTag(tag)
 ---
 
 <BaseLayout title={tag}>
-	<TitlePage title={tag} />
 	<ListPosts posts={posts} />
 </BaseLayout>
