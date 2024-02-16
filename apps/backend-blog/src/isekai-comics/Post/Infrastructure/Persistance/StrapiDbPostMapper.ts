@@ -2,17 +2,7 @@ import { BlockPostContent } from '../../Domain/Content/BlockPostContent'
 import { IframePostContent } from '../../Domain/Content/IframePostContent'
 import { PostContent } from '../../Domain/Content/PostContent'
 import Post from '../../Domain/Post'
-import { EntityService, Registry, Common, UID, Attribute } from '@strapi/strapi'
-
-export type StrapiDbPost = EntityService.Entity<'api::post.post'>
-export type StrapiDbPostContentBlocks = StrapiDbPost['contentBlocks']
-export type ContentComponents = Registry.Keys<
-  Common.Schemas,
-  UID.Component<'content'>
->
-export type DynamicZoneValue = Attribute.GetDynamicZoneValue<
-  Attribute.DynamicZone<ContentComponents[]>
->[0]
+import { DynamicZoneValue, StrapiDbPost } from './StrapiDbPostRepository'
 
 export class StrapiDbPostMapper {
   static createFromDB(post: StrapiDbPost): Post {

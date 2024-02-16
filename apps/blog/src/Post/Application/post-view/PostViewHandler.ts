@@ -4,18 +4,18 @@ import TYPES from '../../../Shared/Container/types'
 import { PostViewDTO } from './DTO/PostViewDTO'
 import type { CommandHandler } from '../../../Shared/Command/CommandHandler'
 import type { PostViewCommand } from './PostViewCommand'
+import type { ImageUrlResolver } from '@/Media/Domain/ImageUrlResolver'
 
 @injectable()
 class PostViewHandler implements CommandHandler<PostViewDTO> {
-  private postRepository: PostRepository
-
-  constructor(@inject(TYPES.PostRepository) postRepository: PostRepository) {
-    this.postRepository = postRepository
-  }
+  constructor(
+    @inject(TYPES.PostRepository) private postRepository: PostRepository,
+    @inject(TYPES.ImageUrlResolver) private imageUrlResolver: ImageUrlResolver,
+  ) {}
 
   async handle(command: PostViewCommand): Promise<PostViewDTO> {
     const post = await this.postRepository.findBySlugOrFail(command.slug)
-    return new PostViewDTO(post)
+    return new PostViewDTO(post, this.imageUrlResolver)
   }
 }
 

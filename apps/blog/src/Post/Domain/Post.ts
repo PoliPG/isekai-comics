@@ -1,5 +1,8 @@
+import type { Image } from '@/Media/Domain/Image'
+
 export default class Post {
   private id: number
+  private _image: Image
   private _title: string
   private _metaTitle: string
   private _metaDescription: string
@@ -15,6 +18,7 @@ export default class Post {
     slug: string,
     content: string,
     createdAt: Date,
+    image: Image,
   ) {
     this.id = id
     this._title = title
@@ -23,10 +27,15 @@ export default class Post {
     this._slug = slug
     this._content = content
     this._createdAt = createdAt
+    this._image = image
   }
 
   getID(): number {
     return this.id
+  }
+
+  get image(): Image {
+    return this._image
   }
 
   get createDate(): Date {

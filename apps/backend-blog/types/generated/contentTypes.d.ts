@@ -387,13 +387,14 @@ export interface ApiPostPost extends Schema.CollectionType {
       Attribute.CustomField<
         'plugin::ckeditor5.CKEditor',
         {
-          preset: 'custom'
+          preset: 'toolbar'
         }
       >
     contentBlocks: Attribute.DynamicZone<
       ['content.content-block', 'content.iframe-product']
     >
     slug: Attribute.String & Attribute.Required & Attribute.Unique
+    image: Attribute.Media & Attribute.Required
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime

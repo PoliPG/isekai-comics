@@ -6,7 +6,8 @@
     "dev": "strapi develop --watch-admin",
     "start": "strapi start",
     "build": "strapi build",
-    "lint": "eslint --ext .js,.ts . --fix"
+    "lint": "eslint --ext .js,.ts . --fix",
+    "types": "strapi ts:generate-types"
   },
   "devDependencies": {
     "@strapi/typescript-utils": "^4.15.5-alpha.5",

@@ -29,7 +29,7 @@
     "content": {
       "type": "customField",
       "options": {
-        "preset": "custom"
+        "preset": "toolbar"
       },
       "customField": "plugin::ckeditor5.CKEditor"
     },
@@ -44,6 +44,14 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

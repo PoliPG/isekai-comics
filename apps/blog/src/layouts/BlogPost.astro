@@ -16,7 +16,7 @@ type Props = {
 }
 
 const { data, readTime, headings, id } = Astro.props
-const { title, metaDescription, createdAt } = data
+const { title, metaDescription, createdAt, imageUrl } = data
 const heroImage = null
 const tags: string[] = []
 
@@ -39,9 +39,11 @@ const tags: string[] = []
 						- {readTime}
 					</p>
 				</div>
-				<h1 class='text-center text-4xl md:text-6xl md:pb-2.5 font-semibold'>
+				<h1 class='text-center mb-4 text-4xl md:text-5xl md:pb-2.5 font-semibold'>
 					{title}
 				</h1>
+				<img src={imageUrl} />
+
 			</div>
 
 			<div class='flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5'>
