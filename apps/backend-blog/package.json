@@ -1,25 +1,30 @@
 {
   "name": "backend-blog",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "strapi develop",
+    "dev": "strapi develop --watch-admin",
     "start": "strapi start",
     "build": "strapi build",
     "lint": "eslint --ext .js,.ts . --fix"
   },
   "devDependencies": {
+    "@strapi/typescript-utils": "^4.15.5-alpha.5",
     "eslint": "^7.32.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
   "dependencies": {
-    "@strapi/plugin-i18n": "4.15.0",
-    "@strapi/plugin-users-permissions": "4.15.0",
-    "@strapi/strapi": "4.15.0",
-    "better-sqlite3": "8.6.0",
-    "pg": "^8.11.3"
+    "@_sh/strapi-plugin-ckeditor": "^2.0.4",
+    "@strapi/plugin-users-permissions": "4.15.5-alpha.5",
+    "@strapi/strapi": "4.15.5-alpha.5",
+    "pg": "^8.11.3",
+    "ioc-container": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "5.3.4",
+    "styled-components": "^5.2.1"
   },
   "author": {
     "name": "A Strapi developer"

@@ -1,28 +1,20 @@
-# `Turborepo` Vite starter
+# `Isekai Comics`
 
-This is an official starter Turborepo.
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e with-vite
-```
-
-## What's inside?
-
-This Turborepo includes the following packages and apps:
+This is the repository for isekai blog.
 
 ### Apps and Packages
 
-- `docs`: a vanilla [vite](https://vitejs.dev) ts app
-- `web`: another vanilla [vite](https://vitejs.dev) ts app
+- `backend-blog`: a strapi [vite](https://vitejs.dev) ts app
+- `blog`: Astro [vite](https://vitejs.dev) ts app
 - `ui`: a stub component & utility library shared by both `web` and `docs` applications
 - `eslint-config-custom`: shared `eslint` configurations
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
 Each package and app is 100% [TypeScript](https://www.typescriptlang.org/).
+
+### Create worspace
+
+turbo gen workspace --type {package | app} --name {string}
 
 ### Utilities
 

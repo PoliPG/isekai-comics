@@ -1,0 +1,27 @@
+{
+  "name": "ioc-container",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "module": "./src/index.ts",
+  "types": "./index.d.js",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc --project ./tsconfig.json"
+  },
+  "dependencies": {
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "tsconfig": "workspace:*",
+    "typescript": "^4.9.4"
+  }
+}
