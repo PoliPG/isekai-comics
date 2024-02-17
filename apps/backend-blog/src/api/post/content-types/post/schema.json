@@ -52,6 +52,11 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "groups": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::group.group"
     }
   }
 }

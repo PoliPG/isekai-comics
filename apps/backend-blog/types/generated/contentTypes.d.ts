@@ -360,51 +360,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   }
 }
 
-export interface ApiPostPost extends Schema.CollectionType {
-  collectionName: 'posts'
-  info: {
-    singularName: 'post'
-    pluralName: 'posts'
-    displayName: 'Post'
-    description: ''
-  }
-  options: {
-    draftAndPublish: true
-  }
-  attributes: {
-    title: Attribute.String & Attribute.Required
-    metaTitle: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60
-      }>
-    metaDescription: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 150
-      }>
-    content: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'toolbar'
-        }
-      >
-    contentBlocks: Attribute.DynamicZone<
-      ['content.content-block', 'content.iframe-product']
-    >
-    slug: Attribute.String & Attribute.Required & Attribute.Unique
-    image: Attribute.Media & Attribute.Required
-    createdAt: Attribute.DateTime
-    updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
-    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private
-    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private
-  }
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files'
   info: {
@@ -676,6 +631,94 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   }
 }
 
+export interface ApiGroupGroup extends Schema.CollectionType {
+  collectionName: 'groups'
+  info: {
+    singularName: 'group'
+    pluralName: 'groups'
+    displayName: 'Group'
+    description: ''
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    name: Attribute.String & Attribute.Required
+    slug: Attribute.String & Attribute.Required
+    parent: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'api::group.group'
+    >
+    type: Attribute.Enumeration<['category', 'collection', 'tag']>
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts'
+  info: {
+    singularName: 'post'
+    pluralName: 'posts'
+    displayName: 'Post'
+    description: ''
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    title: Attribute.String & Attribute.Required
+    metaTitle: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 60
+      }>
+    metaDescription: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 150
+      }>
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'toolbar'
+        }
+      >
+    contentBlocks: Attribute.DynamicZone<
+      ['content.content-block', 'content.iframe-product']
+    >
+    slug: Attribute.String & Attribute.Required & Attribute.Unique
+    image: Attribute.Media & Attribute.Required
+    groups: Attribute.Relation<
+      'api::post.post',
+      'oneToMany',
+      'api::group.group'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private
+  }
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -686,12 +729,13 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission
       'admin::transfer-token': AdminTransferToken
       'admin::transfer-token-permission': AdminTransferTokenPermission
-      'api::post.post': ApiPostPost
       'plugin::upload.file': PluginUploadFile
       'plugin::upload.folder': PluginUploadFolder
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission
       'plugin::users-permissions.role': PluginUsersPermissionsRole
       'plugin::users-permissions.user': PluginUsersPermissionsUser
+      'api::group.group': ApiGroupGroup
+      'api::post.post': ApiPostPost
     }
   }
 }
