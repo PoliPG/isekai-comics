@@ -6,4 +6,5 @@ export default {
   PostViewHandler: Symbol.for('PostViewHandler'),
   GetPostHandler: Symbol.for('GetPostHandler'),
   ImageUrlResolver: Symbol.for('ImageUrlResolver'),
+  GroupRepository: Symbol.for('GroupRepository'),
 }

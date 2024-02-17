@@ -1,0 +1,37 @@
+---
+import type { Group } from '@/Group/Domain/Group'
+import type { GroupRepository } from '@/Group/Domain/GroupRepository'
+import { GroupNotFound } from '@/Group/Domain/errors/GroupNotFound'
+import { ContainerDI } from '@/Shared/Container/ContainerDI'
+import types from '@/Shared/Container/types'
+
+export const prerender = false // server
+const {slug} = Astro.params
+let group!: Group
+
+
+if(!slug) {
+  return new Response(null, {
+    status: 404,
+    statusText: 'Post not found'
+  });
+}
+
+try {
+  const container = ContainerDI.getInstance()
+  const groupRepository = container.get<GroupRepository>(types.GroupRepository)
+  const group = groupRepository.findBySlugOrFail(slug)
+}
+catch(error) {
+  if(error instanceof GroupNotFound)
+	return new Response(null, {
+		status: 404,
+		statusText: 'No encontrado'
+	});
+
+  return new Response(null, {status: 500, statusText: "Hubo un error en el servidor."})
+}
+
+---
+
+<div>HOlaa {group} </div>
