@@ -2,12 +2,12 @@
 import BaseLayout from '@/layouts/BaseLayout'
 import ListPosts from '@/Post/Infrastructure/Astro/components/ListPosts.astro'
 import ListCategories from '@/components/ListCategories'
-import { sluglify, unsluglify, getCategories, getPosts } from '@/utils'
+import { sluglify, unsluglify,  getPosts } from '@/utils'
 import { siteConfig } from '@/data/site.config'
 import Pagination from '@/components/Pagination'
 
 export async function getStaticPaths({ paginate }: any) {
-	const categories = await getCategories()
+	const categories = ['Colecciones', 'Merchandising', "Mangas"]
 	const allPosts = await getPosts()
 
 	return categories.flatMap((category: string) => {

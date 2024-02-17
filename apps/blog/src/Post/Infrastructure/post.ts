@@ -1,9 +1,5 @@
 import { getCollection } from 'astro:content'
 
-export const getCategories = async () => {
-  return []
-}
-
 export const getPosts = async (max?: number) => {
   return []
 }
