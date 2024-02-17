@@ -3,7 +3,6 @@ import { PostListDTO } from '@/Post/Application/get-posts/DTO/PostListDTO'
 import GetPostsCommand from '@/Post/Application/get-posts/GetPostsCommand'
 import { ContainerDI } from '@/Shared/Container/ContainerDI'
 import types from '@/Shared/Container/types'
-import ListCategories from '@/components/ListCategories'
 import ListPosts from '@/Post/Infrastructure/Astro/components/ListPosts.astro'
 import BaseLayout from '@/layouts/BaseLayout'
 import type { MessageBus } from 'message-bus'
@@ -23,8 +22,6 @@ catch(error) {
 ---
 
 <BaseLayout title='Home'>
-	<ListCategories />
-
 	<div>
 		<h2 class='text-lg font-medium tracking-wide text-end'>Latest Posts</h2>
 		<ListPosts FirstBig={true} posts={posts} />

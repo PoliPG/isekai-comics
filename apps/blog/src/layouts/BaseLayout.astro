@@ -2,7 +2,6 @@
 import BaseHead from '@/components/BaseHead'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import ProviderTheme from '@/components/ProviderTheme'
 import ProviderAnimations from '@/components/ProviderAnimations'
 import TwSizeIndicator from '@/components/TwSizeIndicator'
 
@@ -12,18 +11,19 @@ const { title, description } = Astro.props
 <html lang='es' class='scroll-smooth'>
 	<head>
 		<BaseHead title={title} description={description} ogImage={''} articleDate={''} />
-		<ProviderTheme />
 		<ProviderAnimations />
 	</head>
 
-	<body class='bg-white text-stone-950 dark:bg-[#0a0910] dark:text-white w-full h-full'>
-		<main
-			class='px-5 sm:mx-auto sm:max-w-2xl sm:px-8 lg:px-0 antialiased md:max-w-6xl grid gap-12 mt-4 overflow-hidden md:overflow-visible'
+	<body class='bg-white text-stone-950 w-full h-full'>
+		<div
+			class='antialiased grid gap-12 overflow-hidden md:overflow-visible'
 		>
 			<Header />
-			<slot />
+			<main class="px-5 sm:px-8 lg:px-0 sm:mx-auto sm:max-w-2xl md:max-w-6xl">
+				<slot />
+			</main>
 			<Footer />
-		</main>
+		</div>
 		<TwSizeIndicator />
 	</body>
 </html>
