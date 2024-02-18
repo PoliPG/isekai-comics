@@ -6,8 +6,8 @@ import { ViewTransitions } from 'astro:transitions'
 export interface Props {
 	title: string
 	description?: string
-	ogImage?: string | undefined
-	articleDate?: string | undefined
+	ogImage?: string 
+	articleDate?: string 
 }
 
 const { title, description = siteConfig.description, ogImage, articleDate } = Astro.props

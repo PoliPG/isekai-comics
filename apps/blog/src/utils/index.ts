@@ -5,5 +5,5 @@ export {
   getTags,
   getPostByTag,
   filterPostsByCategory,
-} from '../Post/Infrastructure/post'
+} from '@/Isekai/Post/Infrastructure/post'
 export { remarkReadingTime } from './readTime'

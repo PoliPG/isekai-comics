@@ -651,6 +651,8 @@ export interface ApiGroupGroup extends Schema.CollectionType {
       'api::group.group'
     >
     type: Attribute.Enumeration<['category', 'collection', 'tag']>
+    metaTitle: Attribute.String & Attribute.Required
+    metaDescription: Attribute.Text
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime

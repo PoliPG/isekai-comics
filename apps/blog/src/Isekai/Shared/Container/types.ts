@@ -7,4 +7,5 @@ export default {
   GetPostHandler: Symbol.for('GetPostHandler'),
   ImageUrlResolver: Symbol.for('ImageUrlResolver'),
   GroupRepository: Symbol.for('GroupRepository'),
+  GetCollectionViewHandler: Symbol.for('GetCollectionViewHandler'),
 }
