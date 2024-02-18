@@ -1,0 +1,20 @@
+---
+import Group from '@/Isekai/Group/Infrastructure/Astro/components/Group.astro'
+
+interface GroupDTO {
+	name: string
+	slug: string
+}
+const categories: GroupDTO[] = [{name: 'Colecciones', slug: "colecciones"}, {name: 'Merchandising', slug: "merchandising"}, {name: "Mangas", slug: "mangas"}]
+
+const { activeCategory } = Astro.props
+---
+
+<div class='relative flex flex-wrap  gap-5'>
+	{
+		categories.map((category: GroupDTO) => (
+			<Group name={category.name} slug={category.slug} activeCategory={activeCategory} />
+		))
+	}
+	<div class='hidden sm:block absolute w-full bottom-0 border-b-2 -z-40 dark:border-gray-600'></div>
+</div>

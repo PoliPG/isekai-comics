@@ -1,25 +1,24 @@
 ---
 import BlogPost from '@/layouts/BlogPost'
-import ListRelatedPosts from '@/Post/Infrastructure/Astro/components/ListRelatedPosts.astro'
+import ListRelatedPosts from '@/Isekai/Post/Infrastructure/Astro/components/ListRelatedPosts.astro'
 import Share from '@/components/Share'
 import TableOfContents from '@/components/TableOfContents'
-import { ContainerDI } from '@/Shared/Container/ContainerDI'
-import types from '@/Shared/Container/types'
-import { PostViewCommand } from '@/Post/Application/post-view/PostViewCommand'
-import { PostViewDTO } from '@/Post/Application/post-view/DTO/PostViewDTO'
+import { ContainerDI } from '@/Isekai/Shared/Container/ContainerDI'
+import types from '@/Isekai/Shared/Container/types'
+import { PostViewCommand } from '@/Isekai/Post/Application/post-view/PostViewCommand'
+import { PostViewDTO } from '@/Isekai/Post/Application/post-view/DTO/PostViewDTO'
 import type { MessageBus } from 'message-bus'
-import { PostNotFound } from '@/Post/Domain/errors/PostNotFound'
+import { PostNotFound } from '@/Isekai/Post/Domain/errors/PostNotFound'
+import  ErrorComponent404  from '../404.astro'
 
 export const prerender = false // server
 const {slug} = Astro.params
 let post!: PostViewDTO
-
-
 if(!slug) {
-  return new Response(null, {
+  return new Response(ErrorComponent404, {
     status: 404,
-    statusText: 'Post not found'
-  });
+    statusText: 'Not Found'
+  })
 }
 
 try {
@@ -30,14 +29,15 @@ try {
 }
 catch(error) {
   if(error instanceof PostNotFound)
-	return new Response(null, {
-		status: 404,
-		statusText: 'No encontrado'
-	});
+	return new Response(ErrorComponent404, {
+    headers: error,
+    status: 404,
+    statusText: 'Not Found'
+  })
+
 
   return new Response(null, {status: 500, statusText: "Hubo un error en el servidor."})
 }
-
 
 const MAX_POSTS = 3
 const getRelatedPosts = (post: any) => {
