@@ -1,5 +1,16 @@
 import type { Schema, Attribute } from '@strapi/strapi'
 
+export interface AffiliatesAmazonLink extends Schema.Component {
+  collectionName: 'components_affiliates_amazon_links'
+  info: {
+    displayName: 'AmazonLink'
+    icon: 'link'
+  }
+  attributes: {
+    link: Attribute.String & Attribute.Required
+  }
+}
+
 export interface ContentContentBlock extends Schema.Component {
   collectionName: 'components_content_content_blocks'
   info: {
@@ -31,6 +42,7 @@ export interface ContentIframeProduct extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'affiliates.amazon-link': AffiliatesAmazonLink
       'content.content-block': ContentContentBlock
       'content.iframe-product': ContentIframeProduct
     }

@@ -631,6 +631,52 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   }
 }
 
+export interface ApiCollectionCollection extends Schema.CollectionType {
+  collectionName: 'collections'
+  info: {
+    singularName: 'collection'
+    pluralName: 'collections'
+    displayName: 'Collection'
+    description: ''
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    name: Attribute.String & Attribute.Required
+    slug: Attribute.String & Attribute.Required & Attribute.Unique
+    backgroundImage: Attribute.Media & Attribute.Required
+    mainImage: Attribute.Media & Attribute.Required
+    metaTitle: Attribute.String & Attribute.Required
+    metaDescription: Attribute.Text & Attribute.Required
+    parent: Attribute.Relation<
+      'api::collection.collection',
+      'manyToOne',
+      'api::collection.collection'
+    >
+    children: Attribute.Relation<
+      'api::collection.collection',
+      'oneToMany',
+      'api::collection.collection'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::collection.collection',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::collection.collection',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
 export interface ApiGroupGroup extends Schema.CollectionType {
   collectionName: 'groups'
   info: {
@@ -646,6 +692,11 @@ export interface ApiGroupGroup extends Schema.CollectionType {
     name: Attribute.String & Attribute.Required
     slug: Attribute.String & Attribute.Required
     parent: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'api::group.group'
+    >
+    group: Attribute.Relation<
       'api::group.group',
       'oneToOne',
       'api::group.group'
@@ -721,6 +772,43 @@ export interface ApiPostPost extends Schema.CollectionType {
   }
 }
 
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products'
+  info: {
+    singularName: 'product'
+    pluralName: 'products'
+    displayName: 'Product'
+    description: ''
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    name: Attribute.String & Attribute.Required
+    imagenes: Attribute.Media & Attribute.Required
+    Affiliates: Attribute.DynamicZone<['affiliates.amazon-link']> &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 1
+      }>
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -736,8 +824,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission
       'plugin::users-permissions.role': PluginUsersPermissionsRole
       'plugin::users-permissions.user': PluginUsersPermissionsUser
+      'api::collection.collection': ApiCollectionCollection
       'api::group.group': ApiGroupGroup
       'api::post.post': ApiPostPost
+      'api::product.product': ApiProductProduct
     }
   }
 }

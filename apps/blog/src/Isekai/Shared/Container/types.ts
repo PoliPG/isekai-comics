@@ -8,4 +8,5 @@ export default {
   ImageUrlResolver: Symbol.for('ImageUrlResolver'),
   GroupRepository: Symbol.for('GroupRepository'),
   GetCollectionViewHandler: Symbol.for('GetCollectionViewHandler'),
+  CollectionRepository: Symbol.for('CollectionRepository'),
 }

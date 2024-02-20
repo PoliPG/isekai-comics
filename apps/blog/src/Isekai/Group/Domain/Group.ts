@@ -32,6 +32,5 @@ export abstract class Group {
   }
 }
 
-export class Collection extends Group {}
 export class Tag extends Group {}
 export class Category extends Group {}

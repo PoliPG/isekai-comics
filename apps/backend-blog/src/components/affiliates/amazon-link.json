@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_affiliates_amazon_links",
+  "info": {
+    "displayName": "AmazonLink",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

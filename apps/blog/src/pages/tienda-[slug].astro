@@ -1,15 +1,15 @@
 ---
-import { GroupNotFound } from '@/Isekai/Group/Domain/errors/GroupNotFound'
 import { ContainerDI } from '@/Isekai/Shared/Container/ContainerDI'
 import types from '@/Isekai/Shared/Container/types'
 import BaseLayout from '@/layouts/BaseLayout'
 import type { MessageBus } from 'message-bus'
-import {GetCollectionViewCommand} from '@/Isekai/Group/Application/get-collection-view/GetCollectionViewCommand'
-import {GetCollectionViewDTO} from '@/Isekai/Group/Application/get-collection-view/DTO/GetCollectionViewDTO'
+import {GetCollectionViewCommand} from '@/Isekai/Collection/Application/get-collection-view/GetCollectionViewCommand'
+import {CollectionViewDTO} from '@/Isekai/Collection/Application/get-collection-view/DTO/GetCollectionViewDTO'
+import { CollectionNotFound } from '@/Isekai/Collection/Domain/errors/CollectionNotFound'
 
 export const prerender = false // server
 const {slug} = Astro.params
-let groupView!: GetCollectionViewDTO
+let collectionView!: CollectionViewDTO
 
 if(!slug) {
   return new Response(null, {
@@ -22,11 +22,10 @@ try {
   const container = ContainerDI.getInstance()
   const command = new GetCollectionViewCommand(slug)
   const commandBus = container.get<MessageBus>(types.CommandBus)
-  groupView = await commandBus.commit(command)
+  collectionView = await commandBus.commit(command)
 }
 catch(error) {
-  console.log(error)
-  if(error instanceof GroupNotFound)
+  if(error instanceof CollectionNotFound)
 	return new Response(null, {
 		status: 404,
 		statusText: 'No encontrado'
@@ -36,8 +35,16 @@ catch(error) {
 }
 ---
 <BaseLayout
-	title={groupView.metaTitle}
-	description={groupView.metaDescription}
+	title={collectionView.metaTitle}
+	description={collectionView.metaDescription}
 >
-  <div>Holaa {groupView.name} </div>
+  <div class="font-raleway absolute left-0 right-0 bottom-0 top-8 h-2/3  overflow-hidden">
+   
+    <img class="absolute -z-10 inset-0  opacity-40" src={collectionView.backgroundImage} />
+    <div class="relative mt-12 w-full flex items-center">
+      <h1 class="text-center text-4xl w-1/2">Tienda {collectionView.name}</h1>
+      <img class="h-56 w-56 mx-auto" src={collectionView.mainImage} />
+    </div>
+
+  </div>
 </BaseLayout>
