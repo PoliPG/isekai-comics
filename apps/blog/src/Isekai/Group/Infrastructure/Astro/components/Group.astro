@@ -12,15 +12,13 @@ const isActive =
 	activeCategory?.toLocaleLowerCase() === name.toLocaleLowerCase()
 const link = `${Astro.site?.origin ?? ''}/${slug}`
 
+
 ---
 
-<a
-	href={link}
-	class={cn(
-		`text-gray-600  pb-2.5 first-letter:uppercase font-medium hover:text-gray-800 border-b-2 border-opacity-0  border-black hover:border-opacity-100 transition-colors duration-150 ease-linear  `,
-		isActive &&
-			`border-black border-b-2 text-black z-10  border-opacity-100`
-	)}
->
+<a href={link} 
+   class={cn(
+	   'font-bold text-gray-600 first-letter:uppercase hover:text-gray-800 transition-colors duration-150 ease-linear',
+		isActive && 'font-bold'
+	)}>
 	{name}
 </a>
