@@ -31,16 +31,16 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@astrojs/node": "^6.0.3",
-    "@astrojs/rss": "3.0.0",
-    "astro": "3.5.3",
+    "@astrojs/node": "8.2.1",
+    "@astrojs/rss": "4.0.5",
+    "astro": "4.4.4",
     "axios": "^1.6.7",
     "ioc-container": "workspace:*",
     "message-bus": "workspace:*"
   },
   "devDependencies": {
-    "@astrojs/mdx": "1.1.1",
-    "@astrojs/sitemap": "3.0.1",
+    "@astrojs/mdx": "2.1.1",
+    "@astrojs/sitemap": "3.1.1",
     "@astrojs/tailwind": "5.0.1",
     "@pagefind/default-ui": "^1.0.3",
     "@tailwindcss/typography": "0.5.10",

@@ -645,7 +645,6 @@ export interface ApiCollectionCollection extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required
     slug: Attribute.String & Attribute.Required & Attribute.Unique
-    backgroundImage: Attribute.Media & Attribute.Required
     mainImage: Attribute.Media & Attribute.Required
     metaTitle: Attribute.String & Attribute.Required
     metaDescription: Attribute.Text & Attribute.Required
@@ -659,6 +658,8 @@ export interface ApiCollectionCollection extends Schema.CollectionType {
       'oneToMany',
       'api::collection.collection'
     >
+    mainBanner: Attribute.Component<'collection.main-banner'> &
+      Attribute.Required
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
@@ -791,6 +792,11 @@ export interface ApiProductProduct extends Schema.CollectionType {
       Attribute.SetMinMax<{
         min: 1
       }>
+    collection: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'api::collection.collection'
+    >
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime

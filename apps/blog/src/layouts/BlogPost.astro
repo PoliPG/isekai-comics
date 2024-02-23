@@ -22,7 +22,7 @@ const tags: string[] = []
 	title={title}
 	description={metaDescription}
 	image={''}
-	articleDate={data}
+	articleDate={data.toString()}
 >
 	<article class='min-w-full md:py-4 sm:max-w-none md:max-w-none'>
 		<header class='mb-3 flex flex-col justify-center items-center gap-6'>
@@ -57,6 +57,7 @@ const tags: string[] = []
 						loading='eager'
 						class='rounded-md w-full max-h-[300px]  md:max-h-[500px] my-8 object-cover'
 						alt={`img of ${title}`}
+						transition:name={`post-${data.id}`}
 					/>
 				)
 			}

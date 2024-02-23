@@ -1,4 +1,5 @@
 import type { Image } from '@/Isekai/Media/Domain/Image'
+import type { MainBannerCollection } from './MainBannerCollection'
 
 export class Collection {
   protected _name: string
@@ -6,8 +7,8 @@ export class Collection {
   protected _parent: Collection | null
   protected _metaDescription: string
   protected _metaTitle: string
-  protected _backgroundImage: Image
   protected _mainImage: Image
+  protected _mainBanner: MainBannerCollection
 
   constructor(
     name: string,
@@ -15,15 +16,15 @@ export class Collection {
     parent: Collection | null,
     metaTitle: string,
     metaDescription: string,
-    backgroundImage: Image,
     mainImage: Image,
+    mainBanner: MainBannerCollection,
   ) {
     this._name = name
     this._slug = slug
     this._parent = parent
     this._metaDescription = metaDescription
     this._metaTitle = metaTitle
-    this._backgroundImage = backgroundImage
+    this._mainBanner = mainBanner
     this._mainImage = mainImage
   }
 
@@ -39,8 +40,8 @@ export class Collection {
     return this._metaTitle
   }
 
-  get backgroundImage(): Image {
-    return this._backgroundImage
+  get mainBanner(): MainBannerCollection {
+    return this._mainBanner
   }
 
   get mainImage(): Image {

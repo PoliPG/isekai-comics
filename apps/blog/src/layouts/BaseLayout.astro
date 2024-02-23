@@ -15,7 +15,7 @@ interface Props {
 const { title, description, articleDate, ogImage} = Astro.props
 ---
 
-<html lang='es' class='scroll-smooth'  style="scrollbar-gutter: stable both-edges;">
+<html lang='es' class='scroll-smooth'  style="scrollbar-gutter: stable;">
 	<head>
 		<BaseHead title={title} description={description} ogImage={ogImage} articleDate={articleDate} />
 		<ProviderAnimations />

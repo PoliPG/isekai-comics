@@ -16,12 +16,17 @@ export interface StrapiApiCollectionDTO {
     slug: string
     metaTitle: string
     metaDescription: string
-    backgroundImage: StrapiImageDTO
     mainImage: StrapiImageDTO
     createdAt: string
     updatedAt: string
     publishedAt: string
     parent: { data: StrapiApiCollectionDTO | null }
+    mainBanner: {
+      mainImage: StrapiImageDTO
+      backgroundImage: StrapiImageDTO
+      title: string
+      description: string
+    }
   }
 }
 
@@ -34,7 +39,9 @@ export class StrapiApiCollectionRepository implements CollectionRepository {
   async findBySlugOrFail(slug: string): Promise<Collection> {
     const { data: groups } = await this.httpService.get<
       StrapiListingApiDTO<StrapiApiCollectionDTO>
-    >(`${this.endpoint}?filters[slug][$eq]=${slug}&populate=*`)
+    >(
+      `${this.endpoint}?filters[slug][$eq]=${slug}&populate[mainImage]=*&populate[parent]=*&populate[mainBanner][populate]=*`,
+    )
     if (groups.length === 0) throw CollectionNotFound.createFromSlug(slug)
 
     const group = groups[0]

@@ -1,19 +1,21 @@
 import { Collection } from '@/Isekai/Collection/Domain/Collection'
 import type { StrapiApiCollectionDTO } from './StrapiApiCollectionRepository'
 import { Image } from '@/Isekai/Media/Domain/Image'
+import { MainBannerCollection } from '@/Isekai/Collection/Domain/MainBannerCollection'
 
 export class StrapiApiCollectionMapper {
-  static createFromDB(groupDTO: StrapiApiCollectionDTO): Collection {
-    const name = groupDTO.attributes.name
-    const slug = groupDTO.attributes.slug
-    const metaTitle = groupDTO.attributes.metaTitle
-    const metaDescription = groupDTO.attributes.metaDescription
-    const backgroundImage = groupDTO.attributes.backgroundImage.data.attributes
-    const mainImage = groupDTO.attributes.mainImage.data.attributes
+  static createFromDB(collectionDTO: StrapiApiCollectionDTO): Collection {
+    const dataCollection = collectionDTO.attributes
+    const name = dataCollection.name
+    const slug = dataCollection.slug
+    const metaTitle = dataCollection.metaTitle
+    const metaDescription = dataCollection.metaDescription
+    const mainImage = dataCollection.mainImage.data.attributes
+    const mainBanner = dataCollection.mainBanner
     let parent = null
-    if (groupDTO.attributes.parent.data !== null)
+    if (dataCollection.parent.data !== null)
       parent = StrapiApiCollectionMapper.createFromDB(
-        groupDTO.attributes.parent.data,
+        dataCollection.parent.data,
       )
 
     return new Collection(
@@ -22,8 +24,19 @@ export class StrapiApiCollectionMapper {
       parent,
       metaTitle,
       metaDescription,
-      new Image(backgroundImage.url, backgroundImage.ext),
       new Image(mainImage.url, mainImage.ext),
+      new MainBannerCollection(
+        mainBanner.title,
+        mainBanner.description,
+        new Image(
+          mainBanner.mainImage.data.attributes.url,
+          mainBanner.mainImage.data.attributes.ext,
+        ),
+        new Image(
+          mainBanner.backgroundImage.data.attributes.url,
+          mainBanner.backgroundImage.data.attributes.ext,
+        ),
+      ),
     )
   }
 }

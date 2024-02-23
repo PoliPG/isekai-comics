@@ -21,14 +21,6 @@
       "required": true,
       "unique": true
     },
-    "backgroundImage": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "mainImage": {
       "type": "media",
       "multiple": false,
@@ -57,6 +49,13 @@
       "relation": "oneToMany",
       "target": "api::collection.collection",
       "mappedBy": "parent"
+    },
+    "mainBanner": {
+      "displayName": "mainBanner",
+      "type": "component",
+      "repeatable": false,
+      "component": "collection.main-banner",
+      "required": true
     }
   }
 }
