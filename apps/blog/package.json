@@ -21,7 +21,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
+    "start": "astro dev ",
     "build": "astro build",
     "sync": "astro sync",
     "preview": "astro preview",

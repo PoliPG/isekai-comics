@@ -1,9 +1,4 @@
-import {
-  Category,
-  Collection,
-  Tag,
-  type Group,
-} from '@/Isekai/Group/Domain/Group'
+import { Category, Tag, type Group } from '@/Isekai/Group/Domain/Group'
 import type { StrapiApiGroupDTO } from './StrapiApiGroupRepository'
 
 export class StrapiAPiGroupMapper {
@@ -21,8 +16,6 @@ export class StrapiAPiGroupMapper {
     switch (groupDTO.attributes.type) {
       case 'category':
         return new Category(name, slug, parent, metaTitle, metaDescription)
-      case 'collection':
-        return new Collection(name, slug, parent, metaTitle, metaDescription)
       case 'tag':
         return new Tag(name, slug, parent, metaTitle, metaDescription)
     }

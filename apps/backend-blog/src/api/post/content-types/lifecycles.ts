@@ -7,6 +7,5 @@ export default {
     let { data, where, select, populate } = event.params
     const container = IocContainer.getInstance()
     container.get<PostRepository>(TYPES.PostRepository)
-    console.log(data)
   },
 }

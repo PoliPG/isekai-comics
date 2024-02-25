@@ -15,7 +15,7 @@
       "type": "string",
       "required": true
     },
-    "imagenes": {
+    "images": {
       "type": "media",
       "multiple": true,
       "required": true,
@@ -23,7 +23,7 @@
         "images"
       ]
     },
-    "Affiliates": {
+    "affiliates": {
       "type": "dynamiczone",
       "components": [
         "affiliates.amazon-link"

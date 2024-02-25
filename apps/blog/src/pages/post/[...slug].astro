@@ -35,7 +35,7 @@ catch(error) {
     statusText: 'Not Found'
   })
 
-
+  console.log(error)
   return new Response(null, {status: 500, statusText: "Hubo un error en el servidor."})
 }
 

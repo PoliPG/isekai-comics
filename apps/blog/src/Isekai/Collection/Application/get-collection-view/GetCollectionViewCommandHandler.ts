@@ -6,6 +6,7 @@ import { CollectionViewDTO } from './DTO/GetCollectionViewDTO'
 import type { CollectionRepository } from '../../Domain/CollectionRepository'
 import type { Collection } from '../../Domain/Collection'
 import type { ImageUrlResolver } from '@/Isekai/Media/Domain/ImageUrlResolver'
+import type { ProductRepository } from '@/Isekai/Product/Domain/ProductRepository'
 
 @injectable()
 export class GetCollectionViewCommandHandler
@@ -16,15 +17,21 @@ export class GetCollectionViewCommandHandler
     private collectionRepository: CollectionRepository,
     @inject(types.ImageUrlResolver)
     private imageUrlResolver: ImageUrlResolver,
+    @inject(types.ProductRepository)
+    private productRepository: ProductRepository,
   ) {}
 
   async handle(command: GetCollectionViewCommand): Promise<CollectionViewDTO> {
     try {
       const collection: Collection =
         await this.collectionRepository.findBySlugOrFail(command.slug)
-      return new CollectionViewDTO(collection, this.imageUrlResolver)
+
+      const products = await this.productRepository.find({
+        collection: collection.id,
+      })
+
+      return new CollectionViewDTO(collection, this.imageUrlResolver, products)
     } catch (error) {
-      console.log(error)
       throw error
     }
   }

@@ -9,6 +9,13 @@ import type { Collection } from '@/Isekai/Collection/Domain/Collection'
 import type { StrapiImageDTO } from '@/Isekai/Shared/Api/Infrastructure/Strapi/DTO/StrapiImageDTO'
 import { CollectionNotFound } from '@/Isekai/Collection/Domain/errors/CollectionNotFound'
 
+export interface StrapiApiCollectionMainBannerDTO {
+  mainImage: { data: StrapiImageDTO }
+  backgroundImage: { data: StrapiImageDTO }
+  title: string
+  description: string
+}
+
 export interface StrapiApiCollectionDTO {
   id: number
   attributes: {
@@ -16,17 +23,13 @@ export interface StrapiApiCollectionDTO {
     slug: string
     metaTitle: string
     metaDescription: string
-    mainImage: StrapiImageDTO
+    mainImage?: { data: StrapiImageDTO }
     createdAt: string
     updatedAt: string
     publishedAt: string
-    parent: { data: StrapiApiCollectionDTO | null }
-    mainBanner: {
-      mainImage: StrapiImageDTO
-      backgroundImage: StrapiImageDTO
-      title: string
-      description: string
-    }
+    parent?: { data: StrapiApiCollectionDTO | null }
+    children?: { data: StrapiApiCollectionDTO[] }
+    mainBanner?: StrapiApiCollectionMainBannerDTO
   }
 }
 
@@ -37,10 +40,13 @@ export class StrapiApiCollectionRepository implements CollectionRepository {
   constructor(@inject(types.BackendApi) private httpService: HttpService) {}
 
   async findBySlugOrFail(slug: string): Promise<Collection> {
+    const populateChildren = 'populate[children][populate]=*'
+    const populateParent = 'populate[parent][populate]=*'
+
     const { data: groups } = await this.httpService.get<
       StrapiListingApiDTO<StrapiApiCollectionDTO>
     >(
-      `${this.endpoint}?filters[slug][$eq]=${slug}&populate[mainImage]=*&populate[parent]=*&populate[mainBanner][populate]=*`,
+      `${this.endpoint}?filters[slug][$eq]=${slug}&${populateChildren}&${populateParent}&populate[mainImage]=*&populate[mainBanner][populate]=*`,
     )
     if (groups.length === 0) throw CollectionNotFound.createFromSlug(slug)
 

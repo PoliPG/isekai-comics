@@ -3,18 +3,18 @@ import type { PostRepository } from '@/Isekai/Post/Domain/PostRepository'
 import { PostNotFound } from '@/Isekai/Post/Domain/errors/PostNotFound'
 import type { StrapiEntityApiDTO } from '@/Isekai/Shared/Api/Infrastructure/Strapi/DTO/StrapiEntityApiDTO'
 import { inject, injectable } from 'ioc-container'
-import type { HttpService } from 'src/Shared/Api/Domain/HttpService'
 import types from '@/Isekai/Shared/Container/types'
 import type { StrapiListingApiDTO } from '@/Isekai/Shared/Api/Infrastructure/Strapi/DTO/StrapiListingApiDTO'
 import type { StrapiImageDTO } from '@/Isekai/Shared/Api/Infrastructure/Strapi/DTO/StrapiImageDTO'
 import { Image } from '@/Isekai/Media/Domain/Image'
+import type { HttpService } from '@/Isekai/Shared/Api/Domain/HttpService'
 
 interface StrapiPost {
   id: number
   attributes: {
     title: string
     contentBlocks: []
-    image: StrapiImageDTO
+    image: { data: StrapiImageDTO }
     metaTitle: string
     metaDescription: string
     createdAt: string

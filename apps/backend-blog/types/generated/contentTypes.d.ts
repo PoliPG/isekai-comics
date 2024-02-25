@@ -401,9 +401,12 @@ export interface PluginUploadFile extends Schema.CollectionType {
     folderPath: Attribute.String &
       Attribute.Required &
       Attribute.Private &
-      Attribute.SetMinMax<{
-        min: 1
-      }>
+      Attribute.SetMinMax<
+        {
+          min: 1
+        },
+        number
+      >
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     createdBy: Attribute.Relation<
@@ -439,9 +442,12 @@ export interface PluginUploadFolder extends Schema.CollectionType {
   attributes: {
     name: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1
-      }>
+      Attribute.SetMinMax<
+        {
+          min: 1
+        },
+        number
+      >
     pathId: Attribute.Integer & Attribute.Required & Attribute.Unique
     parent: Attribute.Relation<
       'plugin::upload.folder',
@@ -460,9 +466,12 @@ export interface PluginUploadFolder extends Schema.CollectionType {
     >
     path: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1
-      }>
+      Attribute.SetMinMax<
+        {
+          min: 1
+        },
+        number
+      >
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     createdBy: Attribute.Relation<
@@ -473,6 +482,100 @@ export interface PluginUploadFolder extends Schema.CollectionType {
       Attribute.Private
     updatedBy: Attribute.Relation<
       'plugin::upload.folder',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
+export interface PluginContentReleasesRelease extends Schema.CollectionType {
+  collectionName: 'strapi_releases'
+  info: {
+    singularName: 'release'
+    pluralName: 'releases'
+    displayName: 'Release'
+  }
+  options: {
+    draftAndPublish: false
+  }
+  pluginOptions: {
+    'content-manager': {
+      visible: false
+    }
+    'content-type-builder': {
+      visible: false
+    }
+  }
+  attributes: {
+    name: Attribute.String & Attribute.Required
+    releasedAt: Attribute.DateTime
+    scheduledAt: Attribute.DateTime
+    timezone: Attribute.String
+    actions: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToMany',
+      'plugin::content-releases.release-action'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
+export interface PluginContentReleasesReleaseAction
+  extends Schema.CollectionType {
+  collectionName: 'strapi_release_actions'
+  info: {
+    singularName: 'release-action'
+    pluralName: 'release-actions'
+    displayName: 'Release Action'
+  }
+  options: {
+    draftAndPublish: false
+  }
+  pluginOptions: {
+    'content-manager': {
+      visible: false
+    }
+    'content-type-builder': {
+      visible: false
+    }
+  }
+  attributes: {
+    type: Attribute.Enumeration<['publish', 'unpublish']> & Attribute.Required
+    entry: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'morphToOne'
+    >
+    contentType: Attribute.String & Attribute.Required
+    locale: Attribute.String
+    release: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'manyToOne',
+      'plugin::content-releases.release'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'plugin::content-releases.release-action',
       'oneToOne',
       'admin::user'
     > &
@@ -786,12 +889,15 @@ export interface ApiProductProduct extends Schema.CollectionType {
   }
   attributes: {
     name: Attribute.String & Attribute.Required
-    imagenes: Attribute.Media & Attribute.Required
-    Affiliates: Attribute.DynamicZone<['affiliates.amazon-link']> &
+    images: Attribute.Media & Attribute.Required
+    affiliates: Attribute.DynamicZone<['affiliates.amazon-link']> &
       Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1
-      }>
+      Attribute.SetMinMax<
+        {
+          min: 1
+        },
+        number
+      >
     collection: Attribute.Relation<
       'api::product.product',
       'oneToOne',
@@ -827,6 +933,8 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission
       'plugin::upload.file': PluginUploadFile
       'plugin::upload.folder': PluginUploadFolder
+      'plugin::content-releases.release': PluginContentReleasesRelease
+      'plugin::content-releases.release-action': PluginContentReleasesReleaseAction
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission
       'plugin::users-permissions.role': PluginUsersPermissionsRole
       'plugin::users-permissions.user': PluginUsersPermissionsUser

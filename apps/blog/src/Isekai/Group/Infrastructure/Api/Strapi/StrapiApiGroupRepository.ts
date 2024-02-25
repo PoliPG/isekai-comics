@@ -1,4 +1,4 @@
-import { Group, type Category, Collection } from '@/Isekai/Group/Domain/Group'
+import { Group, type Category } from '@/Isekai/Group/Domain/Group'
 import type {
   GroupRepository,
   GroupTypes,
@@ -14,7 +14,7 @@ export interface StrapiApiGroupDTO {
   id: number
   attributes: {
     name: string
-    type: 'collection' | 'tag' | 'category'
+    type: 'tag' | 'category'
     slug: string
     metaTitle: string
     metaDescription: string
@@ -47,16 +47,6 @@ export class StrapiApiGroupRepository implements GroupRepository {
     const { data: groups } = await this.httpService.get<
       StrapiListingApiDTO<StrapiApiGroupDTO>
     >(`${this.endpoint}?filters[type][$eq]=category&populate=*`)
-
-    return groups.map(
-      (group) => StrapiAPiGroupMapper.createFromDB(group) as Category,
-    )
-  }
-
-  async getCollections(): Promise<Collection[]> {
-    const { data: groups } = await this.httpService.get<
-      StrapiListingApiDTO<StrapiApiGroupDTO>
-    >(`${this.endpoint}?filters[type][$eq]=collection&populate=*`)
 
     return groups.map(
       (group) => StrapiAPiGroupMapper.createFromDB(group) as Category,

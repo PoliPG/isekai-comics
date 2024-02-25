@@ -6,6 +6,8 @@ import type { MessageBus } from 'message-bus'
 import {GetCollectionViewCommand} from '@/Isekai/Collection/Application/get-collection-view/GetCollectionViewCommand'
 import {CollectionViewDTO} from '@/Isekai/Collection/Application/get-collection-view/DTO/GetCollectionViewDTO'
 import { CollectionNotFound } from '@/Isekai/Collection/Domain/errors/CollectionNotFound'
+import { Image } from 'astro:assets'
+import { cn } from '@/utils'
 
 export const prerender = false // server
 const {slug} = Astro.params
@@ -38,19 +40,68 @@ catch(error) {
 	title={collectionView.metaTitle}
 	description={collectionView.metaDescription}
 >
-  <div class="h-[35rem] border-b border-gray-200 flex items-center absolute inset-0  overflow-hidden">
-    <img class="absolute -z-10 w-full inset-0 opacity-5 object-cover" src={collectionView.mainBanner.backgroundImage} />
-    <div class="relative w-full flex h-full">
-      <div class="flex-grow self-center">
+
+<Image  
+  loading="eager"
+  class="absolute h-[32.75rem] -z-10 w-full inset-0 opacity-5 overflow-hidden object-cover"
+  width={1920} height={560}  
+  alt={`background of ${collectionView.name}`} src={collectionView.mainBanner.backgroundImage} 
+/>
+
+  <div class="border-b h-[27.75rem] border-gray-200 flex items-center overflow-hidden">
+      <!-- Info -->
+      <div class={cn('flex-grow',  collectionView.children.length === 0 ? 'self-center': 'self-end')}>
         <div class="max-w-2xl ml-auto p-8 py-16 rounded-lg ">
+          { 
+          collectionView.parent && 
+            <a class="mb-2 block" href={`/tienda-${collectionView.parent.slug}`}> Volver a {collectionView.parent.name}</a>
+          }
           <h1 class="font-extrabold text-6xl mb-4">{collectionView.mainBanner.title}</h1>
-          <p>{collectionView.mainBanner.description}</p>
+          <p class="mb-4">{collectionView.mainBanner.description}</p>
+          <div>
+            {
+              collectionView.children.map((children) => (
+                <a
+                  href={`/tienda-${children.slug}`}
+                  class='inline-block rounded-lg text-sm overflow-hidden font-semibold text-gray-700 mr-2 mb-2'
+                >
+                  <Image
+                    src={children.mainImage}
+                    width={200}
+                    height={200}
+                    format='webp'
+                    class='w-28 h-40 object-cover'
+                    alt={`img of ${children.name}`}
+                  />
+                  
+              </a>
+              ))
+            }
+          </div>
         </div>
       </div>
-      <div class="w-6/12 self-end -mb-12">
-        <img class="h-[35rem] mx-auto" src={collectionView.mainBanner.mainImage} />
+      <!-- Image -->
+      <div class="w-6/12 self-end hidden md:block">
+        <Image  width={400} height={384} class="h-[25rem] mx-auto" alt={`img of ${collectionView.name}`} src={collectionView.mainBanner.mainImage} />
       </div>
+  </div>
+  <div class="mx-auto max-w-7xl py-12">
+    <h2 class="font-extrabold text-2xl mb-8">Productos más vendidos</h2>
+    <div class="flex items-center">
+      {
+        collectionView.products.map((product) => (
+
+            <Image
+              src={product.images[0]}
+              width={200}
+              height={200}
+              format='webp'
+              class='w-28 h-40 object-cover'
+              alt={`img of ${product.name}`}
+            />
+            
+        ))
+      }
     </div>
   </div>
-  <div class="h-[48rem]"></div>
 </BaseLayout>

@@ -9,4 +9,5 @@ export default {
   GroupRepository: Symbol.for('GroupRepository'),
   GetCollectionViewHandler: Symbol.for('GetCollectionViewHandler'),
   CollectionRepository: Symbol.for('CollectionRepository'),
+  ProductRepository: Symbol.for('ProductRepository'),
 }
