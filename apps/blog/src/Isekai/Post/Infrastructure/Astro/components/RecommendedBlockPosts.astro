@@ -1,0 +1,28 @@
+---
+import PostCard from '@/Isekai/Post/Infrastructure/Astro/components/PostCard.astro'
+import type { PostListDTO } from '@/Isekai/Post/Application/get-posts/DTO/PostListDTO'
+
+type Props = {
+	posts: PostListDTO[]
+	
+}
+const { posts } = Astro.props
+---
+
+<div
+
+>
+    <div class="flex justify-between items-center">
+        <h2>Recommended Articles</h2>
+        <button class="rounded-lg bg-gray-100">Sell All</button>
+    </div>
+    <section class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-3">
+    {
+		posts.map(async (post) => {
+			return (
+				<PostCard post={post} />
+			)
+		})
+	}
+    </section>
+</div>

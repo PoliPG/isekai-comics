@@ -1,0 +1,91 @@
+---
+import { Image } from 'astro:assets'
+import type {
+  MainBannerCollectionDTO,
+  ParentCollectionDTO,
+  ChildrenCollectionDTO,
+} from '@/Isekai/Collection/Application/get-collection-view/DTO/GetCollectionViewDTO'
+
+interface Props {
+  name: string
+  mainBanner: MainBannerCollectionDTO
+  children: ChildrenCollectionDTO[]
+  parent: ParentCollectionDTO | null
+}
+
+const { name, mainBanner, children, parent } = Astro.props
+---
+
+<div
+  class="collection-background-image absolute h-[32.75rem] -z-10 w-full inset-0 overflow-hidden object-cover"
+  style={`background: linear-gradient(
+                        0deg,
+                        rgb(248, 249, 250, 0.99) 5%,
+                        rgba(248, 248, 248, 0.75) 50%,
+                        rgba(248, 249, 250, 0.95) 90%
+                      ),
+                      url(${mainBanner.backgroundImage})`}
+>
+</div>
+<div
+  class="h-[27.75rem] border-gray-200 flex items-center justify-center overflow-hidden"
+>
+  <!-- Info -->
+  <div class="w-1/2">
+    <div class="max-w-2xl ml-auto flex-shrink text-left text-black p-8 py-16">
+      {
+        parent && (
+          <a
+            class="mb-2 block font-bold hover:text-gray-700"
+            href={`/tienda-${parent.slug}`}
+          >
+            Volver a {parent.name}
+          </a>
+        )
+      }
+      <h1 class="font-extrabold text-6xl mb-4">
+        {mainBanner.title}
+      </h1>
+      <p class="mb-4 font-bold">{mainBanner.description}</p>
+      <div>
+        {
+          children.map((children) => (
+            <a
+              href={`/tienda-${children.slug}`}
+              class="inline-block rounded-lg text-sm overflow-hidden mr-2 mb-2"
+            >
+              <Image
+                src={children.mainImage}
+                width={200}
+                height={200}
+                format="webp"
+                class="w-28 h-40 object-cover"
+                alt={`img of ${children.name}`}
+              />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  <div class="flex-grow">
+    <Image
+      width={400}
+      height={384}
+      class="h-[30rem] w-[40rem] ml-8"
+      alt={`img of ${mainBanner.title}`}
+      src={mainBanner.mainImage}
+    />
+  </div>
+</div>
+
+<style scoped>
+  .collection-background-image {
+    /* Add the blur effect */
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+  }
+</style>

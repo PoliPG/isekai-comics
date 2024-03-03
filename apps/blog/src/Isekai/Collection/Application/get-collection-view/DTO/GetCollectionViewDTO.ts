@@ -3,20 +3,20 @@ import type { ImageUrlResolver } from '@/Isekai/Media/Domain/ImageUrlResolver'
 import { ProductListDTO } from '@/Isekai/Product/Application/DTO/ProductListDTO'
 import type { Product } from '@/Isekai/Product/Domain/Product'
 
-interface MainBannerCollectionDTO {
+export interface MainBannerCollectionDTO {
   title: string
   description: string
   mainImage: string
   backgroundImage: string
 }
 
-interface ChildrenCollectionDTO {
+export interface ChildrenCollectionDTO {
   name: string
   slug: string
   mainImage: string
 }
 
-interface ParentCollectionDTO {
+export interface ParentCollectionDTO {
   name: string
   slug: string
 }

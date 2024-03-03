@@ -29,7 +29,8 @@ export default class StrapiAPI {
       return response.data
     } catch (e) {
       if (isAxiosError(e)) {
-        throw HttpError.createFromCode(parseInt(e.code ?? '500'))
+        const code = parseInt(e.code ?? '500')
+        throw HttpError.createFromCode(!isNaN(code) ? code : 500, e)
       }
       throw e
     }

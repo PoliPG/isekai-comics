@@ -21,30 +21,25 @@ const tags: string[] = []
 <BaseLayout
 	title={title}
 	description={metaDescription}
-	image={''}
+	ogImage={imageUrl}
 	articleDate={data.toString()}
 >
-	<article class='min-w-full md:py-4 sm:max-w-none md:max-w-none'>
-		<header class='mb-3 flex flex-col justify-center items-center gap-6'>
-			<div class='flex flex-col gap-2'>
-				<div class='flex items-center justify-center gap-x-1'>
-					<p class='text-center text-sm text-opacity-50'>
-						Publicado <FormattedDate date={createdAt} />
-					</p>
-					<p class='text-center text-sm text-opacity-50 font-bold'>
-						- {readTime}
-					</p>
-				</div>
-				<h1 class='text-center text-4xl md:text-5xl md:pb-2.5 font-semibold'>
+	<article class='min-w-full sm:max-w-none md:max-w-none'>
+		<div class="relative">
+		<header class='absolute left-10 bottom-0 z-10 mb-3 flex flex-col justify-center items-center gap-6'>
+			<div class=''>
+				<h1 class='text-4xl md:text-5xl md:pb-2.5 font-semibold'>
 					{title}
 				</h1>
+				<p class='text-sm text-opacity-50'>
+					Publicado <FormattedDate date={createdAt} />
+				</p>
 			</div>
 
 			<div class='flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5'>
 				{tags.map((tag: string) => <Tag tag={tag} />)}
 			</div>
 		</header>
-
 		<>
 			{
 				imageUrl && (
@@ -55,17 +50,15 @@ const tags: string[] = []
 						quality={100}
 						format='jpg'
 						loading='eager'
-						class='rounded-md w-full max-h-[300px]  md:max-h-[500px] my-8 object-cover'
+						class='w-full max-h-[300px] md:max-h-[500px] bm-8 object-cover'
 						alt={`img of ${title}`}
 						transition:name={`post-${data.id}`}
 					/>
 				)
 			}
 		</>
-
-		<hr />
-
-		<div>
+	    </div>
+		<div class="max-w-7xl mx-auto">
 			<slot />
 		</div>
 	</article>
