@@ -39,12 +39,11 @@
         "tag"
       ]
     },
-    "metaTitle": {
-      "type": "string",
+    "Seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.basic-seo",
       "required": true
-    },
-    "metaDescription": {
-      "type": "text"
     }
   }
 }

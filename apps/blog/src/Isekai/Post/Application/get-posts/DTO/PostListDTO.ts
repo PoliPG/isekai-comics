@@ -6,6 +6,7 @@ export class PostListDTO {
   readonly title: string
   readonly slug: string
   readonly createdAt: Date
+  readonly contentPreview: string
   readonly imageUrl: string
 
   constructor(post: Post, imageResolver: ImageUrlResolver) {
@@ -13,6 +14,7 @@ export class PostListDTO {
     this.title = post.title
     this.slug = post.slug
     this.createdAt = post.createDate
+    this.contentPreview = post.metaDescription
     this.imageUrl = imageResolver.resolve(post.image)
   }
 }

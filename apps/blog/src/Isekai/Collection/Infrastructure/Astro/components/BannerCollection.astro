@@ -17,7 +17,7 @@ const { name, mainBanner, children, parent } = Astro.props
 ---
 
 <div
-  class="collection-background-image absolute h-[32.75rem] -z-10 w-full inset-0 overflow-hidden object-cover"
+  class="collection-background-image absolute h-[30.75rem] -z-10 w-full inset-0 overflow-hidden object-cover"
   style={`background: linear-gradient(
                         0deg,
                         rgb(248, 249, 250, 0.99) 5%,
@@ -28,18 +28,19 @@ const { name, mainBanner, children, parent } = Astro.props
 >
 </div>
 <div
-  class="h-[27.75rem] border-gray-200 flex items-center justify-center overflow-hidden"
+  class="h-[24.75rem] border-gray-200 flex items-center max-w-7xl mx-auto overflow-hidden"
 >
   <!-- Info -->
   <div class="w-1/2">
-    <div class="max-w-2xl ml-auto flex-shrink text-left text-black p-8 py-16">
+    <div class="max-w-2xl ml-auto flex-shrink text-left text-black p-8">
       {
         parent && (
           <a
-            class="mb-2 block font-bold hover:text-gray-700"
+            class="mb-2 block text-red-600 font-extrabold hover:text-red-500"
             href={`/tienda-${parent.slug}`}
+            title={parent.name}
           >
-            Volver a {parent.name}
+            {parent.name}
           </a>
         )
       }
@@ -53,6 +54,7 @@ const { name, mainBanner, children, parent } = Astro.props
             <a
               href={`/tienda-${children.slug}`}
               class="inline-block rounded-lg text-sm overflow-hidden mr-2 mb-2"
+              title={children.name}
             >
               <Image
                 src={children.mainImage}
@@ -68,15 +70,13 @@ const { name, mainBanner, children, parent } = Astro.props
       </div>
     </div>
   </div>
-  <div class="flex-grow">
-    <Image
-      width={400}
-      height={384}
-      class="h-[30rem] w-[40rem] ml-8"
-      alt={`img of ${mainBanner.title}`}
-      src={mainBanner.mainImage}
-    />
-  </div>
+  <Image
+    width={400}
+    height={384}
+    class="h-[30rem] w-[40rem] ml-8"
+    alt={`img of ${mainBanner.title}`}
+    src={mainBanner.mainImage}
+  />
 </div>
 
 <style scoped>

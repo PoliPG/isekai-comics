@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets'
+import FormattedDate from '@/components/FormattedDate'
+import type { PostListDTO } from '@/Isekai/Post/Application/get-posts/DTO/PostListDTO'
+import { sanitizeHtml } from '@/utils/sanitizeHtml'
+
+type Props = {
+  post: PostListDTO
+}
+
+const { post } = Astro.props
+---
+
+<article
+  class="bg-transparent p-4 group rounded-lg overflow-hidden hover:bg-gray-200 transition-all duration-500"
+>
+  <a class="flex items-center" href={`/post/${post.slug}/`}>
+    <figure class="overflow-hidden flex-shrink-0 rounded-lg">
+      <Image
+        src={post.imageUrl}
+        width={320}
+        height={320}
+        format="webp"
+        class="h-60 w-60 object-cover group-hover:scale-[101%] transition-all duration-200 rounded-[2px]"
+        alt={`img of ${post.title}`}
+      />
+    </figure>
+    <div class="px-6">
+      <h3 class="bottom-post-card mb-2 font-bold text-lg text-black w-full">
+        {post.title}
+      </h3>
+      <p class="mb-4 text-sm">{sanitizeHtml(post.contentPreview)}</p>
+      <div class="text-black w-full rounded-lg">
+        <FormattedDate date={post.createdAt} />
+      </div>
+    </div>
+  </a>
+</article>

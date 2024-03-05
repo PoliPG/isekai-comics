@@ -54,6 +54,28 @@ export interface ContentIframeProduct extends Schema.Component {
   }
 }
 
+export interface SeoBasicSeo extends Schema.Component {
+  collectionName: 'components_seo_basic_seos'
+  info: {
+    displayName: 'BasicSeo'
+    icon: 'priceTag'
+  }
+  attributes: {
+    metaTitle: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 30
+        maxLength: 40
+      }>
+    metaDescription: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 120
+        maxLength: 160
+      }>
+  }
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
@@ -61,6 +83,7 @@ declare module '@strapi/types' {
       'collection.main-banner': CollectionMainBanner
       'content.content-block': ContentContentBlock
       'content.iframe-product': ContentIframeProduct
+      'seo.basic-seo': SeoBasicSeo
     }
   }
 }

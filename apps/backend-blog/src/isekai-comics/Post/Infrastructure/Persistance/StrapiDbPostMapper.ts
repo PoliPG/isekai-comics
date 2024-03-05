@@ -15,8 +15,8 @@ export class StrapiDbPostMapper {
     return new Post(
       post.id as number,
       post.title,
-      post.metaTitle,
-      post.metaDescription,
+      post.Seo.metaTitle,
+      post.Seo.metaDescription,
       contentBlocks
     )
   }

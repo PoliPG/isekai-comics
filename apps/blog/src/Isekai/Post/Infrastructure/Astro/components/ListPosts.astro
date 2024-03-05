@@ -1,27 +1,22 @@
 ---
-import PostCard from '@/Isekai/Post/Infrastructure/Astro/components/PostCard.astro'
-import { cn } from '@/utils'
-import type { PostListDTO } from '@/Isekai/Post/Application/get-posts/DTO/PostListDTO'
+import PostListCard from '@/Isekai/Post/Infrastructure/Astro/components/PostListCard.astro'
+import { PostListDTO } from '@/Isekai/Post/Application/get-posts/DTO/PostListDTO'
 
 type Props = {
-	posts: PostListDTO[]
-	FirstBig?: boolean
+  posts: PostListDTO[]
 }
 
-const { posts, FirstBig = false } = Astro.props
+const { posts } = Astro.props
 ---
 
-<section
-	class={cn(
-		`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-3 h-[30rem]`,
-		FirstBig && `md:[&>*:first-child]:col-span-2 md:[&>*:first-child]:row-span-2 grid-rows-2`,
-	)}
->
-	{
-		posts.map(async (post) => {
-			return (
-				<PostCard post={post} />
-			)
-		})
-	}
+<section>
+  {
+    posts.map(async (post) => {
+      return (
+        <div class="mb-4">
+          <PostListCard post={post} />
+        </div>
+      )
+    })
+  }
 </section>

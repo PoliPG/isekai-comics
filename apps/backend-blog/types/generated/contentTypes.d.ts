@@ -763,6 +763,7 @@ export interface ApiCollectionCollection extends Schema.CollectionType {
     >
     mainBanner: Attribute.Component<'collection.main-banner'> &
       Attribute.Required
+    icon: Attribute.Media
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
@@ -806,8 +807,7 @@ export interface ApiGroupGroup extends Schema.CollectionType {
       'api::group.group'
     >
     type: Attribute.Enumeration<['category', 'collection', 'tag']>
-    metaTitle: Attribute.String & Attribute.Required
-    metaDescription: Attribute.Text
+    Seo: Attribute.Component<'seo.basic-seo'> & Attribute.Required
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
@@ -839,16 +839,6 @@ export interface ApiPostPost extends Schema.CollectionType {
   }
   attributes: {
     title: Attribute.String & Attribute.Required
-    metaTitle: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60
-      }>
-    metaDescription: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 150
-      }>
     content: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor5.CKEditor',
@@ -866,6 +856,7 @@ export interface ApiPostPost extends Schema.CollectionType {
       'oneToMany',
       'api::group.group'
     >
+    Seo: Attribute.Component<'seo.basic-seo'> & Attribute.Required
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime

@@ -56,6 +56,14 @@
       "repeatable": false,
       "component": "collection.main-banner",
       "required": true
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

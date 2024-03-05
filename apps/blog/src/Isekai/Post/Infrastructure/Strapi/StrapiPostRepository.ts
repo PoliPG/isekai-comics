@@ -15,8 +15,10 @@ interface StrapiPost {
     title: string
     contentBlocks: []
     image: { data: StrapiImageDTO }
-    metaTitle: string
-    metaDescription: string
+    Seo: {
+      metaTitle: string
+      metaDescription: string
+    }
     createdAt: string
     updatedAt: string
     publishedAt: string
@@ -37,18 +39,7 @@ export class StrapiPostRepository implements PostRepository {
     )
     if (!response.data) throw PostNotFound.createFromId(id)
     const post = response.data
-    const attributes = post.attributes
-    const imageData = post.attributes.image.data
-    return new Post(
-      post.id,
-      attributes.title,
-      attributes.metaTitle,
-      attributes.metaDescription,
-      attributes.slug,
-      attributes.content,
-      new Date(attributes.createdAt),
-      new Image(imageData.attributes.url, imageData.attributes.ext),
-    )
+    return this.toDomain(post)
   }
 
   async findBySlugOrFail(slug: string): Promise<Post> {
@@ -57,18 +48,7 @@ export class StrapiPostRepository implements PostRepository {
     >(`${this.endpoint}?filters[slug][$eq]=${slug}&populate=*`)
     if (response.data.length === 0) throw PostNotFound.createFromSlug(slug)
     const post = response.data[0]
-    const attributes = post.attributes
-    const imageData = attributes.image.data
-    return new Post(
-      post.id,
-      attributes.title,
-      attributes.metaTitle,
-      attributes.metaDescription,
-      attributes.slug,
-      attributes.content,
-      new Date(attributes.createdAt),
-      new Image(imageData.attributes.url, imageData.attributes.ext),
-    )
+    return this.toDomain(post)
   }
 
   async getPosts(): Promise<Post[]> {
@@ -78,18 +58,22 @@ export class StrapiPostRepository implements PostRepository {
     const posts = response.data
 
     return posts.map((post) => {
-      const attributes = post.attributes
-      const imageData = attributes.image.data
-      return new Post(
-        post.id,
-        attributes.title,
-        attributes.metaTitle,
-        attributes.metaDescription,
-        attributes.slug,
-        attributes.content,
-        new Date(attributes.createdAt),
-        new Image(imageData.attributes.url, imageData.attributes.ext),
-      )
+      return this.toDomain(post)
     })
+  }
+
+  private toDomain(post: StrapiPost): Post {
+    const attributes = post.attributes
+    const imageData = attributes.image.data
+    return new Post(
+      post.id,
+      attributes.title,
+      attributes.Seo.metaTitle,
+      attributes.Seo.metaDescription,
+      attributes.slug,
+      attributes.content,
+      new Date(attributes.createdAt),
+      new Image(imageData.attributes.url, imageData.attributes.ext),
+    )
   }
 }
