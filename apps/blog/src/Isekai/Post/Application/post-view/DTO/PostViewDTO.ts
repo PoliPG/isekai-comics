@@ -9,6 +9,7 @@ export class PostViewDTO {
   readonly content: string
   readonly createdAt: Date
   readonly imageUrl: string
+  readonly author: { name: string; jobTitle: string; photo: string }
 
   constructor(post: Post, imageUrlResolver: ImageUrlResolver) {
     this.id = post.getID()
@@ -18,5 +19,10 @@ export class PostViewDTO {
     this.metaTitle = post.metaTitle
     this.createdAt = post.createDate
     this.imageUrl = imageUrlResolver.resolve(post.image)
+    this.author = {
+      name: post.author.name,
+      jobTitle: post.author.jobTitle,
+      photo: imageUrlResolver.resolve(post.author.image),
+    }
   }
 }

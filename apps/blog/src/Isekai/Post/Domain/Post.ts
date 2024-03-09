@@ -1,4 +1,5 @@
 import type { Image } from '@/Isekai/Media/Domain/Image'
+import type { PostAuthor } from './Author/PostAuthor'
 
 export default class Post {
   private id: number
@@ -9,6 +10,7 @@ export default class Post {
   private _slug: string
   private _content: string
   private _createdAt: Date
+  private _author: PostAuthor
 
   constructor(
     id: number,
@@ -19,6 +21,7 @@ export default class Post {
     content: string,
     createdAt: Date,
     image: Image,
+    author: PostAuthor,
   ) {
     this.id = id
     this._title = title
@@ -28,6 +31,7 @@ export default class Post {
     this._content = content
     this._createdAt = createdAt
     this._image = image
+    this._author = author
   }
 
   getID(): number {
@@ -60,5 +64,9 @@ export default class Post {
 
   get slug(): string {
     return this._slug
+  }
+
+  get author(): PostAuthor {
+    return this._author
   }
 }

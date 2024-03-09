@@ -6,31 +6,34 @@ import ProviderAnimations from '@/components/ProviderAnimations'
 import TwSizeIndicator from '@/components/TwSizeIndicator'
 
 interface Props {
-	title: string
-	description: string
-	ogImage?: string
-	articleDate?: string
+  title: string
+  description: string
+  ogImage?: string
+  articleDate?: string
 }
 
-const { title, description, articleDate, ogImage} = Astro.props
+const { title, description, articleDate, ogImage } = Astro.props
 ---
 
-<html lang='es' class='scroll-smooth'  style="scrollbar-gutter: stable;">
-	<head>
-		<BaseHead title={title} description={description} ogImage={ogImage} articleDate={articleDate} />
-		<ProviderAnimations />
-	</head>
+<html lang="es" class="scroll-smooth" style="scrollbar-gutter: stable;">
+  <head>
+    <BaseHead
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      articleDate={articleDate}
+    />
+    <ProviderAnimations />
+  </head>
 
-	<body class='font-raleway bg-white text-stone-950 w-full h-full'>
-		<div
-			class='antialiased grid overflow-hidden md:overflow-visible'
-		>
-			<Header />
-			<main class="px-5 sm:px-8 lg:px-0">
-				<slot />
-			</main>
-			<Footer />
-		</div>
-		<TwSizeIndicator />
-	</body>
+  <body class="font-rubik bg-white text-stone-950 w-full h-full">
+    <div class="antialiased grid overflow-hidden md:overflow-visible">
+      <Header />
+      <main class="px-5 sm:px-8 lg:px-0">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <TwSizeIndicator />
+  </body>
 </html>

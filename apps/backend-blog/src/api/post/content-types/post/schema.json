@@ -53,6 +53,11 @@
       "repeatable": false,
       "required": true,
       "component": "seo.basic-seo"
+    },
+    "author": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::author.author"
     }
   }
 }

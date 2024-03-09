@@ -7,32 +7,30 @@ import TagIcon from './icons/TagIcon.astro'
 import Logo from '@/components/Logo'
 import ListGroups from '@/Isekai/Group/Infrastructure/Astro/components/ListGroups.astro'
 
-
 // ADD YOUR SOCIAL NETWORKS HERE
 const SOCIALNETWORKS = [
-	{
-		name: 'Twitter',
-		url: 'https://github.com/danielcgilibert/blog-template',
-		icon: TwitterIcon
-	}
+  {
+    name: 'Twitter',
+    url: 'https://github.com/danielcgilibert/blog-template',
+    icon: TwitterIcon,
+  },
 ]
 ---
 
-<header class='z-10 h-20 relative flex justify-between items-center p-2 md:py-4 md:px-8 font-semibold'>
-
-	<button type='button' class='md:ml-6 md:hidden'>
-		<MenuIcon />
-		<span class='sr-only'>Show Menu</span>
-	</button>
-	<div class="absolute left-8 top-4">
-		<Logo title="Isekai Comics" />
-	</div>
-	<div class="hidden lg:block mx-auto">
-		<ListGroups />
-	</div>
-	<div class="absolute right-8">
-		<Search />
-	</div>
-
+<header
+  class="z-10 h-20 relative flex justify-between items-center p-2 md:py-4 md:px-8"
+>
+  <button type="button" class="md:ml-6 md:hidden">
+    <MenuIcon />
+    <span class="sr-only">Show Menu</span>
+  </button>
+  <div class="absolute left-8 top-4">
+    <Logo title="Isekai Comics" />
+  </div>
+  <div class="hidden lg:block mx-auto">
+    <ListGroups />
+  </div>
+  <div class="absolute right-8">
+    <Search />
+  </div>
 </header>
-

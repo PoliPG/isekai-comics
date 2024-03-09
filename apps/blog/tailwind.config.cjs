@@ -21,7 +21,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        raleway: ['Raleway', 'sans-serif'],
+        rubik: ['Rubik', 'sans-serif'],
+        nunito: ['Nunito', 'sans-serif'],
       },
       gridTemplateColumns: {
         list: 'repeat(auto-fill, minmax(400px, max-content))',

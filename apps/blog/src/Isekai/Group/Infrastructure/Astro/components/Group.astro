@@ -2,23 +2,23 @@
 import { cn } from '@/utils'
 
 interface Props {
-	name: string
-	slug: string
-	activeCategory: string
+  name: string
+  slug: string
+  activeCategory: string
 }
 
 const { name, activeCategory, slug } = Astro.props
 const isActive =
-	activeCategory?.toLocaleLowerCase() === name.toLocaleLowerCase()
+  activeCategory?.toLocaleLowerCase() === name.toLocaleLowerCase()
 const link = `${Astro.site?.origin ?? ''}/${slug}`
-
-
 ---
 
-<a href={link} 
-   class={cn(
-	   'font-bold text-gray-600 first-letter:uppercase hover:text-gray-800 transition-colors duration-150 ease-linear',
-		isActive && 'font-bold'
-	)}>
-	{name}
+<a
+  href={link}
+  class={cn(
+    'font-medium text-gray-600 first-letter:uppercase hover:text-gray-800 transition-colors duration-150 ease-linear',
+    isActive && 'font-bold',
+  )}
+>
+  {name}
 </a>

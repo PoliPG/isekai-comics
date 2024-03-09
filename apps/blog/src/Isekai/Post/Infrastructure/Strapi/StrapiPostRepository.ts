@@ -8,24 +8,32 @@ import type { StrapiListingApiDTO } from '@/Isekai/Shared/Api/Infrastructure/Str
 import type { StrapiImageDTO } from '@/Isekai/Shared/Api/Infrastructure/Strapi/DTO/StrapiImageDTO'
 import { Image } from '@/Isekai/Media/Domain/Image'
 import type { HttpService } from '@/Isekai/Shared/Api/Domain/HttpService'
+import { PostAuthor } from '../../Domain/Author/PostAuthor'
+import type {
+  StrapiContent,
+  StrapiPublishedContent,
+} from '@/Isekai/Shared/Api/Infrastructure/Strapi/DTO/StrapiContent'
 
-interface StrapiPost {
-  id: number
-  attributes: {
-    title: string
-    contentBlocks: []
-    image: { data: StrapiImageDTO }
-    Seo: {
-      metaTitle: string
-      metaDescription: string
-    }
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-    content: string
-    slug: string
-  }
+interface StrapiApiAuthorDTO {
+  name: string
+  photo: { data: StrapiImageDTO }
+  jobTitle: string
 }
+
+interface StrapiApiPostDTO {
+  title: string
+  contentBlocks: []
+  image: { data: StrapiImageDTO }
+  Seo: {
+    metaTitle: string
+    metaDescription: string
+  }
+  author: { data: StrapiPublishedContent<StrapiApiAuthorDTO> }
+  content: string
+  slug: string
+}
+
+type StrapiApiContentPostDTO = StrapiContent<StrapiApiPostDTO>
 
 @injectable()
 export class StrapiPostRepository implements PostRepository {
@@ -33,28 +41,57 @@ export class StrapiPostRepository implements PostRepository {
 
   constructor(@inject(types.BackendApi) private httpService: HttpService) {}
 
+  /**
+   * Find Post by id
+   */
   async findOrFail(id: number): Promise<Post> {
-    const response = await this.httpService.get<StrapiEntityApiDTO<StrapiPost>>(
-      `${this.endpoint}/${id}?populate=*`,
-    )
+    let endpoint = `${this.endpoint}/${id}`
+    endpoint += '?populate[Seo][populate]=*'
+    endpoint += '&populate[image][populate]=*'
+    endpoint += '&populate[author][populate]=*'
+
+    const response =
+      await this.httpService.get<StrapiEntityApiDTO<StrapiApiContentPostDTO>>(
+        endpoint,
+      )
+
     if (!response.data) throw PostNotFound.createFromId(id)
     const post = response.data
     return this.toDomain(post)
   }
 
+  /**
+   * Find Post by slug
+   */
   async findBySlugOrFail(slug: string): Promise<Post> {
-    const response = await this.httpService.get<
-      StrapiListingApiDTO<StrapiPost>
-    >(`${this.endpoint}?filters[slug][$eq]=${slug}&populate=*`)
+    let endpoint = `${this.endpoint}?filters[slug][$eq]=${slug}`
+    endpoint += '&populate[Seo][populate]=*'
+    endpoint += '&populate[image][populate]=*'
+    endpoint += '&populate[author][populate]=*'
+
+    const response =
+      await this.httpService.get<StrapiListingApiDTO<StrapiApiContentPostDTO>>(
+        endpoint,
+      )
+
     if (response.data.length === 0) throw PostNotFound.createFromSlug(slug)
     const post = response.data[0]
     return this.toDomain(post)
   }
 
+  /**
+   * Get posts
+   */
   async getPosts(): Promise<Post[]> {
-    const response = await this.httpService.get<
-      StrapiListingApiDTO<StrapiPost>
-    >(`${this.endpoint}?populate=*`)
+    let endpoint = `${this.endpoint}`
+    endpoint += '?populate[Seo][populate]=*'
+    endpoint += '&populate[image][populate]=*'
+    endpoint += '&populate[author][populate]=*'
+
+    const response =
+      await this.httpService.get<StrapiListingApiDTO<StrapiApiContentPostDTO>>(
+        endpoint,
+      )
     const posts = response.data
 
     return posts.map((post) => {
@@ -62,9 +99,14 @@ export class StrapiPostRepository implements PostRepository {
     })
   }
 
-  private toDomain(post: StrapiPost): Post {
+  /**
+   * Convernt post to domain
+   * @returns
+   */
+  private toDomain(post: StrapiApiContentPostDTO): Post {
     const attributes = post.attributes
     const imageData = attributes.image.data
+    const author = attributes.author.data.attributes
     return new Post(
       post.id,
       attributes.title,
@@ -74,6 +116,14 @@ export class StrapiPostRepository implements PostRepository {
       attributes.content,
       new Date(attributes.createdAt),
       new Image(imageData.attributes.url, imageData.attributes.ext),
+      new PostAuthor(
+        author.name,
+        new Image(
+          author.photo.data.attributes.url,
+          author.photo.data.attributes.ext,
+        ),
+        author.jobTitle,
+      ),
     )
   }
 }

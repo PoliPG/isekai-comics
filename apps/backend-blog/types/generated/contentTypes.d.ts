@@ -734,6 +734,38 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   }
 }
 
+export interface ApiAuthorAuthor extends Schema.CollectionType {
+  collectionName: 'authors'
+  info: {
+    singularName: 'author'
+    pluralName: 'authors'
+    displayName: 'Author'
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    name: Attribute.String
+    photo: Attribute.Media & Attribute.Required
+    jobTitle: Attribute.String
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
 export interface ApiCollectionCollection extends Schema.CollectionType {
   collectionName: 'collections'
   info: {
@@ -857,6 +889,11 @@ export interface ApiPostPost extends Schema.CollectionType {
       'api::group.group'
     >
     Seo: Attribute.Component<'seo.basic-seo'> & Attribute.Required
+    author: Attribute.Relation<
+      'api::post.post',
+      'oneToOne',
+      'api::author.author'
+    >
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     publishedAt: Attribute.DateTime
@@ -929,6 +966,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission
       'plugin::users-permissions.role': PluginUsersPermissionsRole
       'plugin::users-permissions.user': PluginUsersPermissionsUser
+      'api::author.author': ApiAuthorAuthor
       'api::collection.collection': ApiCollectionCollection
       'api::group.group': ApiGroupGroup
       'api::post.post': ApiPostPost
