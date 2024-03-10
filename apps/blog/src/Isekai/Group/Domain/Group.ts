@@ -30,6 +30,10 @@ export abstract class Group {
   get metaTitle(): string {
     return this.__metaTitle
   }
+
+  get slug(): string {
+    return this._slug
+  }
 }
 
 export class Tag extends Group {}

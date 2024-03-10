@@ -1,3 +1,4 @@
+import { Tag } from '@/Isekai/Group/Domain/Group'
 import type { ImageUrlResolver } from '@/Isekai/Media/Domain/ImageUrlResolver'
 import type Post from '@/Isekai/Post/Domain/Post'
 
@@ -10,6 +11,7 @@ export class PostViewDTO {
   readonly createdAt: Date
   readonly imageUrl: string
   readonly author: { name: string; jobTitle: string; photo: string }
+  readonly tags: { name: string; slug: string }[]
 
   constructor(post: Post, imageUrlResolver: ImageUrlResolver) {
     this.id = post.getID()
@@ -24,5 +26,10 @@ export class PostViewDTO {
       jobTitle: post.author.jobTitle,
       photo: imageUrlResolver.resolve(post.author.image),
     }
+    this.tags = post.groups
+      .filter((group) => group instanceof Tag)
+      .map((tag) => {
+        return { name: tag.name, slug: tag.slug }
+      })
   }
 }

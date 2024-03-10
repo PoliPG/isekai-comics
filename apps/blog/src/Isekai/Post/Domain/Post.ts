@@ -1,5 +1,6 @@
 import type { Image } from '@/Isekai/Media/Domain/Image'
 import type { PostAuthor } from './Author/PostAuthor'
+import type { Group } from '@/Isekai/Group/Domain/Group'
 
 export default class Post {
   private id: number
@@ -11,6 +12,7 @@ export default class Post {
   private _content: string
   private _createdAt: Date
   private _author: PostAuthor
+  private _groups: Group[]
 
   constructor(
     id: number,
@@ -22,6 +24,7 @@ export default class Post {
     createdAt: Date,
     image: Image,
     author: PostAuthor,
+    groups: Group[],
   ) {
     this.id = id
     this._title = title
@@ -32,6 +35,7 @@ export default class Post {
     this._createdAt = createdAt
     this._image = image
     this._author = author
+    this._groups = groups
   }
 
   getID(): number {
@@ -68,5 +72,9 @@ export default class Post {
 
   get author(): PostAuthor {
     return this._author
+  }
+
+  get groups(): Group[] {
+    return this._groups
   }
 }

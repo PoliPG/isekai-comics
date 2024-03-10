@@ -5,13 +5,12 @@ export class StrapiAPiGroupMapper {
   static createFromDB(groupDTO: StrapiApiGroupDTO): Group {
     const name = groupDTO.attributes.name
     const slug = groupDTO.attributes.slug
-    const metaTitle = groupDTO.attributes.metaTitle
-    const metaDescription = groupDTO.attributes.metaDescription
+    const metaTitle = groupDTO.attributes.Seo?.metaTitle ?? ''
+    const metaDescription = groupDTO.attributes.Seo?.metaDescription ?? ''
+    const parentObj = groupDTO.attributes.parent
     let parent = null
-    if (groupDTO.attributes.parent.data !== null)
-      parent = StrapiAPiGroupMapper.createFromDB(
-        groupDTO.attributes.parent.data,
-      )
+    if (parentObj && parentObj.data !== null)
+      parent = StrapiAPiGroupMapper.createFromDB(parentObj.data)
 
     switch (groupDTO.attributes.type) {
       case 'category':

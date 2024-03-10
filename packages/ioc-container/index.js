@@ -38,9 +38,9 @@ var IocContainer = /** @class */ (function (_super) {
         return _super.call(this) || this;
     }
     IocContainer.getInstance = function () {
-        if (IocContainer.instance === null) {
-            IocContainer.instance = new IocContainer();
-        }
+        if (IocContainer.instance !== null)
+            return IocContainer.instance;
+        IocContainer.instance = new IocContainer();
         return IocContainer.instance;
     };
     IocContainer.instance = null;

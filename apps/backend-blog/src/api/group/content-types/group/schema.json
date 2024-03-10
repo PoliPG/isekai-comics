@@ -23,9 +23,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::group.group",
-      "inversedBy": "group"
+      "inversedBy": "children"
     },
-    "group": {
+    "children": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::group.group",

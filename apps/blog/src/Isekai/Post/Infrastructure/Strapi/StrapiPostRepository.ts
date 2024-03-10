@@ -13,6 +13,8 @@ import type {
   StrapiContent,
   StrapiPublishedContent,
 } from '@/Isekai/Shared/Api/Infrastructure/Strapi/DTO/StrapiContent'
+import type { StrapiApiGroupDTO } from '@/Isekai/Group/Infrastructure/Api/Strapi/StrapiApiGroupRepository'
+import { StrapiAPiGroupMapper } from '@/Isekai/Group/Infrastructure/Api/Strapi/StrapiApiGroupMapper'
 
 interface StrapiApiAuthorDTO {
   name: string
@@ -31,6 +33,7 @@ interface StrapiApiPostDTO {
   author: { data: StrapiPublishedContent<StrapiApiAuthorDTO> }
   content: string
   slug: string
+  groups: { data: StrapiApiGroupDTO[] }
 }
 
 type StrapiApiContentPostDTO = StrapiContent<StrapiApiPostDTO>
@@ -49,6 +52,7 @@ export class StrapiPostRepository implements PostRepository {
     endpoint += '?populate[Seo][populate]=*'
     endpoint += '&populate[image][populate]=*'
     endpoint += '&populate[author][populate]=*'
+    endpoint += '&populate[groups][populate]=*'
 
     const response =
       await this.httpService.get<StrapiEntityApiDTO<StrapiApiContentPostDTO>>(
@@ -68,6 +72,7 @@ export class StrapiPostRepository implements PostRepository {
     endpoint += '&populate[Seo][populate]=*'
     endpoint += '&populate[image][populate]=*'
     endpoint += '&populate[author][populate]=*'
+    endpoint += '&populate[groups][populate]=*'
 
     const response =
       await this.httpService.get<StrapiListingApiDTO<StrapiApiContentPostDTO>>(
@@ -87,6 +92,7 @@ export class StrapiPostRepository implements PostRepository {
     endpoint += '?populate[Seo][populate]=*'
     endpoint += '&populate[image][populate]=*'
     endpoint += '&populate[author][populate]=*'
+    endpoint += '&populate[groups][populate]=*'
 
     const response =
       await this.httpService.get<StrapiListingApiDTO<StrapiApiContentPostDTO>>(
@@ -107,6 +113,7 @@ export class StrapiPostRepository implements PostRepository {
     const attributes = post.attributes
     const imageData = attributes.image.data
     const author = attributes.author.data.attributes
+    const groups = attributes.groups.data
     return new Post(
       post.id,
       attributes.title,
@@ -124,6 +131,7 @@ export class StrapiPostRepository implements PostRepository {
         ),
         author.jobTitle,
       ),
+      groups.map((group) => StrapiAPiGroupMapper.createFromDB(group)),
     )
   }
 }

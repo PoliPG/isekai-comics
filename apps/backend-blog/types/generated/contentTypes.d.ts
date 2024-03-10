@@ -833,7 +833,7 @@ export interface ApiGroupGroup extends Schema.CollectionType {
       'oneToOne',
       'api::group.group'
     >
-    group: Attribute.Relation<
+    children: Attribute.Relation<
       'api::group.group',
       'oneToOne',
       'api::group.group'

@@ -9,21 +9,20 @@ import type { StrapiListingApiDTO } from '@/Isekai/Shared/Api/Infrastructure/Str
 import types from '@/Isekai/Shared/Container/types'
 import { inject, injectable } from 'ioc-container'
 import { StrapiAPiGroupMapper } from './StrapiApiGroupMapper'
+import type { StrapiPublishedContent } from '@/Isekai/Shared/Api/Infrastructure/Strapi/DTO/StrapiContent'
 
-export interface StrapiApiGroupDTO {
-  id: number
-  attributes: {
-    name: string
-    type: 'tag' | 'category'
-    slug: string
+export interface StrapiApiGroupDataDTO {
+  name: string
+  type: 'tag' | 'category'
+  slug: string
+  Seo?: {
     metaTitle: string
     metaDescription: string
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-    parent: { data: StrapiApiGroupDTO | null }
   }
+  parent?: { data: StrapiApiGroupDTO | null }
 }
+
+export type StrapiApiGroupDTO = StrapiPublishedContent<StrapiApiGroupDataDTO>
 
 @injectable()
 export class StrapiApiGroupRepository implements GroupRepository {

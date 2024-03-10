@@ -1,11 +1,12 @@
 ---
 export interface Props {
   tag: string
+  slug: string
 }
-const { tag } = Astro.props
+const { tag, slug } = Astro.props
 ---
 
-<a href={`/tags/${tag}`} aria-label={tag}>
+<a href={`/tags/${slug}`} aria-label={tag}>
   <span
     class="bg-white font-semibold text-gray-700 border hover:shadow border-gray-200 shadow-sm text-sm w-fit px-2 py-1 md:px-5 md:py-2 rounded-sm"
   >

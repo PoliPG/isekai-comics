@@ -14,14 +14,7 @@ type Props = {
 }
 
 const { data, readTime, headings, id } = Astro.props
-const { title, metaDescription, createdAt, imageUrl, author } = data
-const tags: string[] = [
-  'Juegos de mesa',
-  'One piece',
-  'Mangas',
-  'Anime',
-  'Merchandising',
-]
+const { title, metaDescription, createdAt, imageUrl, author, tags } = data
 ---
 
 <BaseLayout
@@ -37,10 +30,10 @@ const tags: string[] = [
       >
       </div>
       <header
-        class="absolute left-10 bottom-0 z-10 mb-3 flex flex-col justify-center items-center gap-6"
+        class="absolute left-0 w-full bottom-5 z-10 mb-3 flex flex-col justify-center items-center gap-6"
       >
-        <div class="text-white">
-          <h1 class="text-2xl md:text-4xl uppercase md:pb-2.5 font-extrabold">
+        <div class="text-white max-w-7xl w-full">
+          <h1 class="text-2xl md:text-5xl uppercase md:pb-2.5 font-extrabold">
             {title}
           </h1>
           <p class="text-sm text-opacity-50">
@@ -71,10 +64,7 @@ const tags: string[] = [
     </div>
     <div id="post-info" class="bg-gray-100 py-16">
       <div class="max-w-7xl mx-auto flex gap-4 justify-center">
-        <div
-          id="post-info-author"
-          class="border-r-2 flex items-center px-8 py-2 gap-4 border-gray-300"
-        >
+        <div id="post-info-author" class="flex items-center px-8 py-2 gap-4">
           <figure>
             {
               author.photo && (
@@ -96,14 +86,18 @@ const tags: string[] = [
             <p>{author.jobTitle}</p>
           </div>
         </div>
-        <div id="post-info-tags" class="mx-8">
-          <p class="font-semibold text-sm mb-3 px-1">Etiquetas:</p>
-          <div
-            class="flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5"
-          >
-            {tags.map((tag: string) => <Tag tag={tag} />)}
-          </div>
-        </div>
+        {
+          tags.length > 0 && (
+            <div id="post-info-tags" class="border-l-2 px-8 border-gray-300">
+              <p class="font-semibold text-sm mb-3 px-1">Etiquetas:</p>
+              <div class="flex flex-wrap justify-center items-center gap-2 gap-y-4 md:gap-5">
+                {tags.map((tag) => (
+                  <Tag tag={tag.name} slug={tag.slug} />
+                ))}
+              </div>
+            </div>
+          )
+        }
       </div>
     </div>
   </article>
