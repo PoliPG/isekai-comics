@@ -50,7 +50,8 @@
     "reading-time": "^1.5.0",
     "pagefind": "^1.0.3",
     "mdast-util-to-string": "^4.0.0",
-    "motion": "^10.16.4"
+    "motion": "^10.16.4",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^6.7.4",
@@ -60,8 +61,7 @@
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "prettier-config-standard": "^7.0.0",
-    "prettier-plugin-astro": "^0.12.0",
-    "typescript": "^5.2.2"
+    "prettier-plugin-astro": "^0.12.0"
   },
   "lint-staged": {
     "*.{astro,js,jsx,ts,tsx,md,mdx,json}": [
