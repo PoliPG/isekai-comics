@@ -9,7 +9,7 @@
     }
   },
   "scripts": {
-    "build": "tsc --project ./tsconfig.json"
+    "build-dev": "tsc --project ./tsconfig.json"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",
