@@ -5,15 +5,14 @@ import tailwind from '@astrojs/tailwind'
 import { remarkReadingTime } from './src/utils/readTime.ts'
 import node from '@astrojs/node'
 import { config } from 'dotenv'
+import vercel from '@astrojs/vercel/serverless'
 
 config()
 
 // https://astro.build/config
 export default defineConfig({
   output: 'hybrid',
-  adapter: node({
-    mode: 'middleware',
-  }),
+  adapter: vercel(),
   base: '',
   site: process.env.BASE_URL, // Write here your website url
   markdown: {
