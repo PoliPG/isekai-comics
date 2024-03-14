@@ -31,23 +31,22 @@
     "prettier": "prettier --write . --plugin=prettier-plugin-astro"
   },
   "dependencies": {
+    "@astrojs/sitemap": "3.1.1",
     "@astrojs/node": "8.2.1",
     "@astrojs/rss": "4.0.5",
     "@astrojs/vercel": "^7.3.6",
     "astro": "4.4.4",
     "axios": "^1.6.7",
     "ioc-container": "workspace:*",
-    "message-bus": "workspace:*"
-  },
-  "devDependencies": {
-    "@astrojs/mdx": "2.1.1",
-    "@astrojs/sitemap": "3.1.1",
+    "message-bus": "workspace:*",
     "@astrojs/tailwind": "5.0.1",
+    "dotenv": "^16.3.1",
     "@pagefind/default-ui": "^1.0.3",
     "@tailwindcss/typography": "0.5.10",
+    "clsx": "2.0.0"
+  },
+  "devDependencies": {
     "@typescript-eslint/parser": "^6.7.4",
-    "clsx": "2.0.0",
-    "dotenv": "^16.3.1",
     "eslint": "^8.53.0",
     "eslint-plugin-astro": "^0.29.1",
     "eslint-plugin-jsx-a11y": "^6.7.1",
