@@ -1,7 +1,7 @@
 {
   "name": "blog",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Isekai comics web page",
   "author": "hipolitoperez",
   "license": "GPL-3.0-only",
@@ -23,7 +23,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "sync": "astro sync",
-    "start": "astro preview",
+    "start": "node ./dist/server/entry.mjs",
     "postbuild": "pagefind --site dist",
     "format:check": "prettier --plugin-search-dir=. --check .",
     "format": "prettier --plugin-search-dir=. --write .",
@@ -34,7 +34,6 @@
     "@astrojs/sitemap": "3.1.1",
     "@astrojs/node": "8.2.1",
     "@astrojs/rss": "4.0.5",
-    "@astrojs/vercel": "^7.3.6",
     "astro": "4.4.4",
     "axios": "^1.6.7",
     "ioc-container": "workspace:*",
@@ -67,5 +66,6 @@
     "*.{astro,js,jsx,ts,tsx,md,mdx,json}": [
       "prettier --write . --plugin=prettier-plugin-astro"
     ]
-  }
+  },
+  "packageManager": "pnpm@8.6.10"
 }

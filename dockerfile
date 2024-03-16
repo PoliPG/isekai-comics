@@ -1,0 +1,44 @@
+FROM node:lts AS base
+
+# config pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+RUN pnpm -g add turbo
+ 
+FROM base AS builder
+# Set working directory
+WORKDIR /app
+COPY . .
+RUN turbo prune blog --docker
+ 
+# Add lockfile and package.json's of isolated subworkspace
+FROM base AS installer
+WORKDIR /app
+ 
+# First install the dependencies (as they change less often)
+COPY .gitignore .gitignore
+COPY --from=builder /app/out/json/ .
+COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
+
+ENV HOST=0.0.0.0
+ENV PORT=8080
+ 
+# Build the project
+COPY --from=builder /app/out/full/ .
+RUN pnpm turbo run build --filter=blog...
+ 
+FROM base AS runner
+WORKDIR /app
+ 
+COPY --from=installer /app/apps/blog/package.json .
+COPY --from=installer /app/apps/blog/public ./apps/blog/public
+COPY --from=installer /app/node_modules ./apps/blog/node_modules
+COPY --from=installer /app/apps/blog/dist ./apps/blog/dist
+
+EXPOSE 8080
+
+# Comando para ejecutar la aplicación cuando se inicie el contenedor
+CMD node ./apps/blog/dist/server/entry.mjs
