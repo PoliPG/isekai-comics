@@ -6,12 +6,12 @@ on:
       - production-front-*
 
 env:
-  PROJECT_ID: { { PROJECT_ID } }
-  GAR_LOCATION: { { GAR_LOCATION } }
-  REPOSITORY: { { GAR_REPOSITORY } }
-  SERVICE: { { FRONT_SERVICE } }
-  REGION: { { GCR_REGION } }
-  BACKEND_API_TOKEN: { { BACKEND_API_TOKEN } }
+  PROJECT_ID: ${{secrets.PROJECT_ID}}
+  GAR_LOCATION: ${{secrets.GAR_LOCATION}}
+  REPOSITORY: ${{secrets.GAR_REPOSITORY}}
+  SERVICE: ${{secrets.FRONT_SERVICE}}
+  REGION: ${{secrets.GCR_REGION }}
+  BACKEND_API_TOKEN: ${{secrets.BACKEND_API_TOKEN }}
 
 jobs:
   deploy:
