@@ -6,6 +6,24 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
 RUN pnpm -g add turbo
+
+ARG NODE_ENV
+ENV NODE_ENV=$NODE_ENV
+
+ARG HOST=127.0.0.1
+ENV HOST=$HOST
+
+ARG PORT=8080
+ENV PORT=$PORT
+
+ARG BASE_URL
+ENV BASE_URL=$BASE_URL
+
+ARG STRAPI_URL
+ENV STRAPI_URL=$STRAPI_URL
+
+ARG STRAPI_API_TOKEN
+ENV STRAPI_API_TOKEN=$STRAPI_API_TOKEN
  
 FROM base AS builder
 # Set working directory
@@ -22,9 +40,6 @@ COPY .gitignore .gitignore
 COPY --from=builder /app/out/json/ .
 COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
-
-ENV HOST=0.0.0.0
-ENV PORT=8080
  
 # Build the project
 COPY --from=builder /app/out/full/ .
