@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.GCP_CREDENTIALS }}
 
       - name: Build and Push Container
-        run: |-
+        run: >
           docker build ${{jobs.deploy.steps}}
            --build-arg NODE_ENV=production
            --build-arg BASE_URL=http://localhost:8080
