@@ -38,6 +38,7 @@ COPY --from=installer /app/apps/blog/public ./apps/blog/public
 COPY --from=installer /app/node_modules ./apps/blog/node_modules
 COPY --from=installer /app/apps/blog/dist ./apps/blog/dist
 
+
 EXPOSE 8080
 
 # Comando para ejecutar la aplicación cuando se inicie el contenedor
