@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets'
+import FormattedDate from '@/components/FormattedDate'
+import type { PostListDTO } from '@/Isekai/Post/Application/get-posts/DTO/PostListDTO'
+
+type Props = {
+  post: PostListDTO
+}
+
+const { post } = Astro.props
+---
+
+<article class="relative rounded-lg overflow-hidden group">
+  <a href={`/post/${post.slug}/`}>
+    <Image
+      src={post.imageUrl}
+      width={200}
+      height={200}
+      format="webp"
+      class="h-full min-w-full object-cover hover:scale-[101%] transition-all duration-200 rounded-[2px]"
+      alt={`img of ${post.title}`}
+    />
+    <div
+      class="bottom-post-card absolute text-white px-3 bottom-0 w-full flex items-center h-16"
+    >
+      <span class="font-bold"> {post.title}</span>
+    </div>
+    <div class="z-10 absolute top-0 left-0 p-3 text-white w-full rounded-lg">
+      <p class="font-bold leading-5">{'category'}</p>
+      <FormattedDate date={post.createdAt} />
+    </div>
+  </a>
+</article>
+
+<style scoped>
+  .bottom-post-card {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      360deg,
+      rgba(0, 0, 0, 0.9220063025210083) 0%,
+      rgba(77, 77, 77, 0.022846638655462215) 88%
+    );
+  }
+</style>

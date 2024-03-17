@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_seo_basic_seos",
+  "info": {
+    "displayName": "BasicSeo",
+    "icon": "priceTag"
+  },
+  "options": {},
+  "attributes": {
+    "metaTitle": {
+      "type": "string",
+      "required": true,
+      "maxLength": 40,
+      "minLength": 30
+    },
+    "metaDescription": {
+      "type": "text",
+      "required": true,
+      "maxLength": 160,
+      "minLength": 120
+    }
+  }
+}

@@ -360,50 +360,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   }
 }
 
-export interface ApiPostPost extends Schema.CollectionType {
-  collectionName: 'posts'
-  info: {
-    singularName: 'post'
-    pluralName: 'posts'
-    displayName: 'Post'
-    description: ''
-  }
-  options: {
-    draftAndPublish: true
-  }
-  attributes: {
-    title: Attribute.String & Attribute.Required
-    metaTitle: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 60
-      }>
-    metaDescription: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 150
-      }>
-    content: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'custom'
-        }
-      >
-    contentBlocks: Attribute.DynamicZone<
-      ['content.content-block', 'content.iframe-product']
-    >
-    slug: Attribute.String & Attribute.Required & Attribute.Unique
-    createdAt: Attribute.DateTime
-    updatedAt: Attribute.DateTime
-    publishedAt: Attribute.DateTime
-    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private
-    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
-      Attribute.Private
-  }
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files'
   info: {
@@ -445,9 +401,12 @@ export interface PluginUploadFile extends Schema.CollectionType {
     folderPath: Attribute.String &
       Attribute.Required &
       Attribute.Private &
-      Attribute.SetMinMax<{
-        min: 1
-      }>
+      Attribute.SetMinMax<
+        {
+          min: 1
+        },
+        number
+      >
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     createdBy: Attribute.Relation<
@@ -483,9 +442,12 @@ export interface PluginUploadFolder extends Schema.CollectionType {
   attributes: {
     name: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1
-      }>
+      Attribute.SetMinMax<
+        {
+          min: 1
+        },
+        number
+      >
     pathId: Attribute.Integer & Attribute.Required & Attribute.Unique
     parent: Attribute.Relation<
       'plugin::upload.folder',
@@ -504,9 +466,12 @@ export interface PluginUploadFolder extends Schema.CollectionType {
     >
     path: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMax<{
-        min: 1
-      }>
+      Attribute.SetMinMax<
+        {
+          min: 1
+        },
+        number
+      >
     createdAt: Attribute.DateTime
     updatedAt: Attribute.DateTime
     createdBy: Attribute.Relation<
@@ -517,6 +482,100 @@ export interface PluginUploadFolder extends Schema.CollectionType {
       Attribute.Private
     updatedBy: Attribute.Relation<
       'plugin::upload.folder',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
+export interface PluginContentReleasesRelease extends Schema.CollectionType {
+  collectionName: 'strapi_releases'
+  info: {
+    singularName: 'release'
+    pluralName: 'releases'
+    displayName: 'Release'
+  }
+  options: {
+    draftAndPublish: false
+  }
+  pluginOptions: {
+    'content-manager': {
+      visible: false
+    }
+    'content-type-builder': {
+      visible: false
+    }
+  }
+  attributes: {
+    name: Attribute.String & Attribute.Required
+    releasedAt: Attribute.DateTime
+    scheduledAt: Attribute.DateTime
+    timezone: Attribute.String
+    actions: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToMany',
+      'plugin::content-releases.release-action'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'plugin::content-releases.release',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
+export interface PluginContentReleasesReleaseAction
+  extends Schema.CollectionType {
+  collectionName: 'strapi_release_actions'
+  info: {
+    singularName: 'release-action'
+    pluralName: 'release-actions'
+    displayName: 'Release Action'
+  }
+  options: {
+    draftAndPublish: false
+  }
+  pluginOptions: {
+    'content-manager': {
+      visible: false
+    }
+    'content-type-builder': {
+      visible: false
+    }
+  }
+  attributes: {
+    type: Attribute.Enumeration<['publish', 'unpublish']> & Attribute.Required
+    entry: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'morphToOne'
+    >
+    contentType: Attribute.String & Attribute.Required
+    locale: Attribute.String
+    release: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'manyToOne',
+      'plugin::content-releases.release'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'plugin::content-releases.release-action',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'plugin::content-releases.release-action',
       'oneToOne',
       'admin::user'
     > &
@@ -675,6 +734,221 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   }
 }
 
+export interface ApiAuthorAuthor extends Schema.CollectionType {
+  collectionName: 'authors'
+  info: {
+    singularName: 'author'
+    pluralName: 'authors'
+    displayName: 'Author'
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    name: Attribute.String
+    photo: Attribute.Media & Attribute.Required
+    jobTitle: Attribute.String
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::author.author',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
+export interface ApiCollectionCollection extends Schema.CollectionType {
+  collectionName: 'collections'
+  info: {
+    singularName: 'collection'
+    pluralName: 'collections'
+    displayName: 'Collection'
+    description: ''
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    name: Attribute.String & Attribute.Required
+    slug: Attribute.String & Attribute.Required & Attribute.Unique
+    mainImage: Attribute.Media & Attribute.Required
+    metaTitle: Attribute.String & Attribute.Required
+    metaDescription: Attribute.Text & Attribute.Required
+    parent: Attribute.Relation<
+      'api::collection.collection',
+      'manyToOne',
+      'api::collection.collection'
+    >
+    children: Attribute.Relation<
+      'api::collection.collection',
+      'oneToMany',
+      'api::collection.collection'
+    >
+    mainBanner: Attribute.Component<'collection.main-banner'> &
+      Attribute.Required
+    icon: Attribute.Media
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::collection.collection',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::collection.collection',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
+export interface ApiGroupGroup extends Schema.CollectionType {
+  collectionName: 'groups'
+  info: {
+    singularName: 'group'
+    pluralName: 'groups'
+    displayName: 'Group'
+    description: ''
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    name: Attribute.String & Attribute.Required
+    slug: Attribute.String & Attribute.Required
+    parent: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'api::group.group'
+    >
+    children: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'api::group.group'
+    >
+    type: Attribute.Enumeration<['category', 'collection', 'tag']>
+    Seo: Attribute.Component<'seo.basic-seo'> & Attribute.Required
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
+export interface ApiPostPost extends Schema.CollectionType {
+  collectionName: 'posts'
+  info: {
+    singularName: 'post'
+    pluralName: 'posts'
+    displayName: 'Post'
+    description: ''
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    title: Attribute.String & Attribute.Required
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'toolbar'
+        }
+      >
+    contentBlocks: Attribute.DynamicZone<
+      ['content.content-block', 'content.iframe-product']
+    >
+    slug: Attribute.String & Attribute.Required & Attribute.Unique
+    image: Attribute.Media & Attribute.Required
+    groups: Attribute.Relation<
+      'api::post.post',
+      'oneToMany',
+      'api::group.group'
+    >
+    Seo: Attribute.Component<'seo.basic-seo'> & Attribute.Required
+    author: Attribute.Relation<
+      'api::post.post',
+      'oneToOne',
+      'api::author.author'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private
+    updatedBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
+      Attribute.Private
+  }
+}
+
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products'
+  info: {
+    singularName: 'product'
+    pluralName: 'products'
+    displayName: 'Product'
+    description: ''
+  }
+  options: {
+    draftAndPublish: true
+  }
+  attributes: {
+    name: Attribute.String & Attribute.Required
+    images: Attribute.Media & Attribute.Required
+    affiliates: Attribute.DynamicZone<['affiliates.amazon-link']> &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 1
+        },
+        number
+      >
+    collection: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'api::collection.collection'
+    >
+    createdAt: Attribute.DateTime
+    updatedAt: Attribute.DateTime
+    publishedAt: Attribute.DateTime
+    createdBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+    updatedBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private
+  }
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -685,12 +959,18 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission
       'admin::transfer-token': AdminTransferToken
       'admin::transfer-token-permission': AdminTransferTokenPermission
-      'api::post.post': ApiPostPost
       'plugin::upload.file': PluginUploadFile
       'plugin::upload.folder': PluginUploadFolder
+      'plugin::content-releases.release': PluginContentReleasesRelease
+      'plugin::content-releases.release-action': PluginContentReleasesReleaseAction
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission
       'plugin::users-permissions.role': PluginUsersPermissionsRole
       'plugin::users-permissions.user': PluginUsersPermissionsUser
+      'api::author.author': ApiAuthorAuthor
+      'api::collection.collection': ApiCollectionCollection
+      'api::group.group': ApiGroupGroup
+      'api::post.post': ApiPostPost
+      'api::product.product': ApiProductProduct
     }
   }
 }

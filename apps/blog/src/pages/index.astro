@@ -1,13 +1,12 @@
 ---
-import { PostListDTO } from '@/Post/Application/get-posts/DTO/PostListDTO'
-import GetPostsCommand from '@/Post/Application/get-posts/GetPostsCommand'
-import { ContainerDI } from '@/Shared/Container/ContainerDI'
-import types from '@/Shared/Container/types'
-import ListCategories from '@/components/ListCategories'
-import ListPosts from '@/Post/Infrastructure/Astro/components/ListPosts.astro'
-import TitlePage from '@/components/TitlePage'
+import { PostListDTO } from '@/Isekai/Post/Application/get-posts/DTO/PostListDTO'
+import GetPostsCommand from '@/Isekai/Post/Application/get-posts/GetPostsCommand'
+import { ContainerDI } from '@/Isekai/Shared/Container/ContainerDI'
+import types from '@/Isekai/Shared/Container/types'
+import ListPosts from '@/Isekai/Post/Infrastructure/Astro/components/ListPosts.astro'
 import BaseLayout from '@/layouts/BaseLayout'
 import type { MessageBus } from 'message-bus'
+import RecommendedBlockPosts from '@/Isekai/Post/Infrastructure/Astro/components/RecommendedBlockPosts.astro'
 
 let posts!: PostListDTO[]
 const MAX_POSTS = 5 // max number of posts to show on the home page
@@ -16,37 +15,44 @@ try {
   const container = ContainerDI.getInstance()
   const commandBus = container.get<MessageBus>(types.CommandBus)
   posts = await commandBus.commit<PostListDTO[]>(command)
-}
-catch(error) {
+} catch (error) {
   console.log(error)
-  return new Response(null, {status: 500, statusText: "Hubo un error en el servidor."})
+  return new Response(null, {
+    status: 500,
+    statusText: 'Hubo un error en el servidor.',
+  })
 }
 ---
 
-<BaseLayout title='Home'>
-	<TitlePage title='Isekai Comics' />
-	<ListCategories />
-
-	<div>
-		<h2 class='text-lg font-medium tracking-wide text-end'>Latest Posts</h2>
-		<ListPosts FirstBig={true} posts={posts} />
-	</div>
+<BaseLayout title="Home" description="Home Isekai Comics">
+  <div class="max-w-6xl mx-auto my-8">
+    <div class="mb-8">
+      <h2 class="text-2xl mb-6 tracking-wide font-bold">
+        Recommended Articles
+      </h2>
+      <RecommendedBlockPosts FirstBig={true} posts={posts} />
+    </div>
+    <div class="mb-4 lg:w-2/3">
+      <h2 class="text-2xl mb-6 tracking-wide font-bold">Lo nuevo</h2>
+      <ListPosts posts={posts} />
+    </div>
+  </div>
 </BaseLayout>
 
 <script>
-	import { animate } from 'motion'
-	const showAnimations = localStorage.getItem('animations') === 'true'
+  import { animate } from 'motion'
+  const showAnimations = localStorage.getItem('animations') === 'true'
 
-	if (showAnimations) {
-		animate(
-			'.title',
-			{ y: [80, 0], opacity: [0, 1] },
-			{
-				duration: 2.5,
-				opacity: { duration: 3 },
+  if (showAnimations) {
+    animate(
+      '.title',
+      { y: [80, 0], opacity: [0, 1] },
+      {
+        duration: 2.5,
+        opacity: { duration: 3 },
 
-				offset: [0, 0.55, 0.75]
-			}
-		)
-	}
+        offset: [0, 0.55, 0.75],
+      },
+    )
+  }
 </script>

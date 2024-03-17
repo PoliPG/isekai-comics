@@ -1,0 +1,22 @@
+---
+import PostListCard from '@/Isekai/Post/Infrastructure/Astro/components/PostListCard.astro'
+import { PostListDTO } from '@/Isekai/Post/Application/get-posts/DTO/PostListDTO'
+
+type Props = {
+  posts: PostListDTO[]
+}
+
+const { posts } = Astro.props
+---
+
+<section>
+  {
+    posts.map(async (post) => {
+      return (
+        <div class="mb-4">
+          <PostListCard post={post} />
+        </div>
+      )
+    })
+  }
+</section>

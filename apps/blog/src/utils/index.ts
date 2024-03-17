@@ -1,10 +1,9 @@
 export { sluglify, unsluglify } from './sluglify'
 export { cn } from './cn'
 export {
-  getCategories,
   getPosts,
   getTags,
   getPostByTag,
   filterPostsByCategory,
-} from '../Post/Infrastructure/post'
+} from '@/Isekai/Post/Infrastructure/post'
 export { remarkReadingTime } from './readTime'

@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "build": "tsc --project ./tsconfig.json"
+    "build-dev": "tsc --project ./tsconfig.json"
   },
   "dependencies": {
     "inversify": "^6.0.2",

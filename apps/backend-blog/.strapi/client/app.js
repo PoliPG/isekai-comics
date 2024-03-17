@@ -10,6 +10,7 @@ import customisations from "../../src/admin/app.tsx";
 
 renderAdmin(document.getElementById("strapi"), {
   customisations,
+
   plugins: {
     ckeditor5: ckeditor5,
     "users-permissions": usersPermissions,

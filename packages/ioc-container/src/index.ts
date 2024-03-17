@@ -10,7 +10,6 @@ class IocContainer extends Container {
 
   static getInstance(): IocContainer {
     if (IocContainer.instance !== null) return IocContainer.instance
-    console.log('NEW CONTAINER ---------------------------------- ')
     IocContainer.instance = new IocContainer()
     return IocContainer.instance
   }
