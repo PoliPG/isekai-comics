@@ -15,7 +15,7 @@ env:
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy front
     permissions:
       contents: 'read'
       id-token: 'write'
