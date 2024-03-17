@@ -40,12 +40,7 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build
-           --build-arg NODE_ENV=production
-           --build-arg BASE_URL=http://localhost:8080
-           --build-arg STRAPI_URL=http://localhost:1337
-           --build-arg STRAPI_API_TOKEN=${{env.BACKEND_API_TOKEN}}
-           -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" . -f dockerfile.frontend
+          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" --build-arg NODE_ENV=production --build-arg BASE_URL=http://localhost:8080 --build-arg STRAPI_URL=http://localhost:1337 --build-arg STRAPI_API_TOKEN=${{env.BACKEND_API_TOKEN}} . -f dockerfile.frontend
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
 
       - name: Deploy to Cloud Run
