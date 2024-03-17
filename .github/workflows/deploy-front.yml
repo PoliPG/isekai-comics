@@ -22,7 +22,7 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
       - name: Google Auth
@@ -40,12 +40,12 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build ${{jobs.deploy.steps}} 
-            --build-arg NODE_ENV=production
-            --build-arg BASE_URL=http://localhost:8080
-            --build-arg STRAPI_URL=http://localhost:1337
-            --build-arg STRAPI_API_TOKEN=${{env.BACKEND_API_TOKEN}}
-          -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" ./
+          docker build ${{jobs.deploy.steps}}
+           --build-arg NODE_ENV=production
+           --build-arg BASE_URL=http://localhost:8080
+           --build-arg STRAPI_URL=http://localhost:1337
+           --build-arg STRAPI_API_TOKEN=${{env.BACKEND_API_TOKEN}}
+           -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}" ./ 
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
 
       - name: Deploy to Cloud Run
