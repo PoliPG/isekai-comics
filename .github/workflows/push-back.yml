@@ -60,7 +60,7 @@ jobs:
           --build-arg DATABASE_URL=${{env.DATABASE_URL}}
           --build-arg JWT_SECRET=${{env.JWT_SECRET}}
           .
-          -f dockerfile.frontend
+          -f dockerfile.backend
 
       - name: Push Container
         run: docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
