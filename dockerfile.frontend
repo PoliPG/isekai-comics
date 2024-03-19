@@ -54,7 +54,7 @@ COPY --from=installer /app/node_modules ./apps/blog/node_modules
 COPY --from=installer /app/apps/blog/dist ./apps/blog/dist
 
 
-EXPOSE 8080
+EXPOSE ${PORT}
 
 # Comando para ejecutar la aplicación cuando se inicie el contenedor
 CMD node ./apps/blog/dist/server/entry.mjs
