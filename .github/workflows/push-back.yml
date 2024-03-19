@@ -78,11 +78,11 @@ jobs:
       - name: Configure kubectl
         run: |
           gcloud components install gke-gcloud-auth-plugin
-          gcloud container clusters get-credentials ${{env.CLUSTER_NAME}} --zone ${{env.REGION}} --project ${{env.PROJECT_ID}} --namespace=backend
+          gcloud container clusters get-credentials ${{env.CLUSTER_NAME}} --zone ${{env.REGION}} --project ${{env.PROJECT_ID}}
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl apply -f kubernetes/backend/deployment.yml
+          kubectl apply -f kubernetes/backend/deployment.yml --namespace=backend
 
       - name: Show Output
         run: echo ${{ steps.deploy.outputs.url }}
