@@ -2,8 +2,8 @@ name: Build and Deploy to Cloud Run front deploy
 
 on:
   push:
-    branches:
-      - develop
+    tag:
+      - production-front-*
 
 env:
   PROJECT_ID: ${{secrets.PROJECT_ID}}
