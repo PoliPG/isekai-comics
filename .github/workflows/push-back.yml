@@ -1,4 +1,4 @@
-name: Build back image
+name: Build and deployment back
 
 on:
   push:
