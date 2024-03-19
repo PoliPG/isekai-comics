@@ -74,10 +74,11 @@ jobs:
         with:
           version: 'latest'
           project_id: ${{ env.PROJECT_ID }}
-          export_default_credentials: true
+          export_default_credentials: 'project_id'
 
       - name: Configure kubectl
         run: |
+          gcloud components install gke-gcloud-auth-plugin
           gcloud container clusters get-credentials ${{env.CLUSTER_NAME}} --zone ${{env.REGION}} --project ${{env.PROJECT_ID}}
 
       - name: Deploy to Kubernetes

@@ -14,8 +14,9 @@ spec:
         project: backend
     spec:
       containers:
-        - name: backend
-          image: europe-southwest1-docker.pkg.dev/isekai-comics/isekai-comics/strapi:latest
+        - name: strapi-sha256-1
+          image: europe-southwest1-docker.pkg.dev/isekai-comics/isekai-comics/strapi@sha256:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 1337
 
