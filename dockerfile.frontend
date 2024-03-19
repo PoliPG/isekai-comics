@@ -10,10 +10,9 @@ RUN pnpm -g add turbo
 ARG NODE_ENV
 ENV NODE_ENV=$NODE_ENV
 
-ARG HOST=127.0.0.1
-ENV HOST=$HOST
+ENV HOST=0.0.0.0
 
-ARG PORT=8080
+ARG PORT=4321
 ENV PORT=$PORT
 
 ARG BASE_URL
@@ -53,8 +52,11 @@ COPY --from=installer /app/apps/blog/public ./apps/blog/public
 COPY --from=installer /app/node_modules ./apps/blog/node_modules
 COPY --from=installer /app/apps/blog/dist ./apps/blog/dist
 
+EXPOSE $PORT
 
-EXPOSE ${PORT}
+RUN echo $HOST
+
+RUN echo $PORT
 
 # Comando para ejecutar la aplicación cuando se inicie el contenedor
 CMD node ./apps/blog/dist/server/entry.mjs
