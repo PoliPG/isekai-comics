@@ -7,11 +7,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      project: backend
+      project: website
+      app: backend
   template:
     metadata:
       labels:
-        project: backend
+        project: website
+        app: backend
     spec:
       containers:
         - name: strapi-sha256-1
