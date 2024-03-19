@@ -1,4 +1,4 @@
-name: Build and Deploy to Cloud Run front
+name: Build and Deploy to Cloud Run front deploy
 
 on:
   push:
