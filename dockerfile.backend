@@ -78,4 +78,4 @@ COPY --from=installer --chown=node ./app .
 ENV PATH /app/node_modules/.bin:$PATH
 
 EXPOSE $PORT
-CMD pnpm run start --filter backend-blog 
+CMD pnpm --filter backend-blog start 
