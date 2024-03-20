@@ -30,6 +30,7 @@ metadata:
 spec:
   selector:
     app: backend
+    project: website
   ports:
     - protocol: TCP
       port: 80
