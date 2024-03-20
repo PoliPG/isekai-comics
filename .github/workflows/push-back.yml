@@ -12,7 +12,7 @@ env:
   REPOSITORY: ${{secrets.GAR_REPOSITORY}}
   SERVICE: ${{secrets.BACK_SERVICE}}
   REGION: ${{secrets.GCR_REGION }}
-  # Project backend env
+  # Project backend env.
   NODE_ENV: production
   DATABASE_CLIENT: postgres
   PUBLIC_URL: http://34.175.250.54
