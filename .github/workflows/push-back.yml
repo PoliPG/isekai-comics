@@ -55,7 +55,7 @@ jobs:
           -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
           -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:latest"
           --build-arg NODE_ENV=${{env.NODE_ENV}}
-          --build-arg PUBLIC_URL=${{evn.PUBLIC_URL}}
+          --build-arg PUBLIC_URL=${{env.PUBLIC_URL}}
           --build-arg PORT=${{env.PORT}}
           --build-arg APP_KEYS=${{env.APP_KEYS}}
           --build-arg API_TOKEN_SALT=${{env.API_TOKEN_SALT}}
