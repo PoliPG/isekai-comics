@@ -16,7 +16,7 @@ ENV NODE_ENV=$NODE_ENV
 
 ENV HOST=0.0.0.0
 
-ARG PORT=4321
+ARG PORT=1337
 ENV PORT=$PORT
 
 ARG PUBLIC_URL
@@ -53,7 +53,6 @@ RUN turbo prune backend-blog --docker
 FROM base as installer
 WORKDIR /app
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev git > /dev/null 2>&1
-ENV NODE_ENV=production
 
 # First install the dependencies (as they change less often)
 COPY .gitignore .gitignore
@@ -75,13 +74,9 @@ RUN pnpm -g add strapi
 WORKDIR /app
 USER node
 
-COPY --from=installer --chown=node /app/apps/backend-blog/public ./public
-COPY --from=installer --chown=node /app/apps/backend-blog/.strapi ./strapi
-COPY --from=installer --chown=node /app/apps/backend-blog/dist ./dist
-COPY --from=installer --chown=node /app/apps/backend-blog/package.json ./package.json
-COPY --from=installer --chown=node /app/apps/backend-blog/favicon.png ./favicon.png
-COPY --from=installer --chown=node /app/node_modules ./node_modules
+COPY --from=installer --chown=node ./app .
+COPY --from=installer --chown=node ./app .
 ENV PATH /app/node_modules/.bin:$PATH
 
 EXPOSE $PORT
-CMD ["pnpm", "start"]
+CMD pnpm run start --filter backend-blog 
