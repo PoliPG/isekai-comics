@@ -2,7 +2,7 @@ name: Build and Deploy to Cloud Run front deploy
 
 on:
   push:
-    tag:
+    tags:
       - production-front-*
 
 env:

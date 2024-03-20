@@ -12,7 +12,6 @@ env:
   REPOSITORY: ${{secrets.GAR_REPOSITORY}}
   SERVICE: ${{secrets.BACK_SERVICE}}
   REGION: ${{secrets.GCR_REGION }}
-  PUBLIC_URL: ${{secrets.BACKEND_PUBLIC_URL }}
   DATABASE_CLIENT: postgres
   DATABASE_URL: ${{secrets.BACKEND_DATABASE_URL}}
   JWT_SECRET: ${{secrets.BACKEND_STRAPI_JWT_SECRET}}
@@ -52,8 +51,8 @@ jobs:
           -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}"
           -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:latest"
           --build-arg NODE_ENV=production
-          --build-arg PUBLIC_URL=http://localhost:1337
-          --build-arg PORT=1337
+          --build-arg PUBLIC_URL=http://34.175.250.54
+          --build-arg PORT=80
           --build-arg APP_KEYS=${{env.APP_KEYS}}
           --build-arg API_TOKEN_SALT=${{env.API_TOKEN_SALT}}
           --build-arg ADMIN_JWT_SECRET=${{env.ADMIN_JWT_SECRET}}
