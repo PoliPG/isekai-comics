@@ -75,7 +75,6 @@ WORKDIR /app
 USER node
 
 COPY --from=installer --chown=node ./app .
-COPY --from=installer --chown=node ./app .
 ENV PATH /app/node_modules/.bin:$PATH
 
 EXPOSE $PORT
