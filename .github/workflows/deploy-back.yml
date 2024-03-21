@@ -15,7 +15,7 @@ env:
   # Project backend env.
   NODE_ENV: production
   DATABASE_CLIENT: postgres
-  PUBLIC_URL: http://34.175.250.54
+  PUBLIC_URL: https://strapi-ydh5q4zvea-no.a.run.app
   PORT: 1337
   DATABASE_URL: ${{secrets.BACKEND_DATABASE_URL}}
   JWT_SECRET: ${{secrets.BACKEND_STRAPI_JWT_SECRET}}
